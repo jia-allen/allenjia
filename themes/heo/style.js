@@ -110,8 +110,209 @@ const Style = () => {
         color: var(--heo-color-text-secondary-dark) !important;
       }
 
+      /* 文章正文：保留 Notion 的颜色语义，接近参考站的阅读层级 */
+      #theme-heo #article-wrapper #notion-article.notion {
+        --heo-article-text: #37352f;
+        --heo-article-heading: #202124;
+        --heo-article-muted: #787774;
+        --heo-article-link: #2563eb;
+        color: var(--heo-article-text);
+        line-height: 2rem;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-text,
+      #theme-heo #article-wrapper #notion-article .notion-text-children {
+        color: var(--heo-article-text);
+        line-height: 2rem;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h {
+        color: var(--heo-article-heading);
+        line-height: 1.45;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h.notion-blue {
+        color: #2563eb;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h.notion-red {
+        color: #dc2626;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h.notion-orange {
+        color: #ea580c;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h.notion-green {
+        color: #16a34a;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h.notion-purple {
+        color: #7c3aed;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h.notion-pink {
+        color: #db2777;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h.notion-teal {
+        color: #0f766e;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-h.notion-gray {
+        color: var(--heo-article-muted);
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-link {
+        color: var(--heo-article-link);
+        border-bottom-color: rgba(37, 99, 235, 0.35);
+        opacity: 1;
+        text-decoration: none;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-link:hover {
+        color: #1d4ed8;
+        border-bottom-color: currentColor;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-quote {
+        color: #475569;
+        border: 1px dashed #93c5fd;
+        border-left: 5px solid #3b82f6;
+        border-radius: 6px;
+        background: #eff6ff;
+        box-shadow: 0 0 1px rgba(59, 130, 246, 0.25);
+        line-height: 1.9;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-list li {
+        color: var(--heo-article-text);
+        line-height: 1.9;
+      }
+
+      #theme-heo #article-wrapper #notion-article .notion-inline-code {
+        color: #b42318;
+        background: #fff1f0;
+        border-radius: 4px;
+        padding: 0.08em 0.3em;
+      }
+
+      html.dark #theme-heo #article-wrapper #notion-article.notion {
+        --heo-article-text: #d4d4d4;
+        --heo-article-heading: #f3f4f6;
+        --heo-article-muted: #a3a3a3;
+        --heo-article-link: #93c5fd;
+      }
+
+      html.dark #theme-heo #article-wrapper #notion-article .notion-quote {
+        color: #dbeafe;
+        border-color: rgba(147, 197, 253, 0.45);
+        border-left-color: #60a5fa;
+        background: rgba(30, 64, 175, 0.22);
+      }
+
+      html.dark #theme-heo #article-wrapper #notion-article .notion-inline-code {
+        color: #fecaca;
+        background: rgba(127, 29, 29, 0.35);
+      }
+
       body {
         background-color: #f7f9fe;
+      }
+
+      /* 文章详情首屏：完整展示封面，用蓝色遮罩承托标题信息 */
+      #theme-heo #post-bg {
+        min-height: clamp(30rem, 72vh, 43rem);
+        isolation: isolate;
+        background: #1e3a8a;
+      }
+
+      #theme-heo #post-cover-wrapper {
+        overflow: hidden;
+        background: #1e3a8a;
+      }
+
+      #theme-heo #post-cover-wrapper #post-cover {
+        display: block;
+        height: 100%;
+        width: 100%;
+        transform: scale(1.02);
+        transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1), opacity 700ms ease;
+        opacity: 0.96;
+      }
+
+      #theme-heo #post-bg:hover #post-cover-wrapper #post-cover {
+        transform: scale(1);
+      }
+
+      #theme-heo #post-bg .post-cover-overlay {
+        z-index: 1;
+        pointer-events: none;
+        background:
+          linear-gradient(90deg, rgba(2, 48, 110, 0.94) 0%, rgba(3, 105, 161, 0.8) 43%, rgba(30, 64, 175, 0.48) 100%),
+          linear-gradient(0deg, rgba(3, 24, 56, 0.7) 0%, rgba(3, 24, 56, 0.08) 68%);
+      }
+
+      #theme-heo #post-info {
+        left: 50%;
+        transform: translateX(-50%);
+        animation: heo-post-info-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      #theme-heo #post-info > div:first-child {
+        flex-wrap: wrap;
+        row-gap: 0.35rem;
+      }
+
+      #theme-heo #post-info section {
+        row-gap: 0.2rem;
+      }
+
+      @keyframes heo-post-info-in {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 1.25rem);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+
+      @media (max-width: 767px) {
+        #theme-heo #post-bg {
+          min-height: 30rem;
+        }
+
+        #theme-heo #post-info {
+          bottom: 4.5rem;
+          padding-left: 1.15rem;
+          padding-right: 1.15rem;
+        }
+
+        #theme-heo #post-info > div:first-child,
+        #theme-heo #post-info > div:nth-child(2),
+        #theme-heo #post-info section {
+          justify-content: flex-start;
+          text-align: left;
+        }
+
+        #theme-heo #post-info > div:nth-child(2) {
+          font-size: 1.9rem;
+          line-height: 1.25;
+        }
+
+        #theme-heo #post-info section {
+          line-height: 1.7rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #theme-heo #post-cover-wrapper #post-cover,
+        #theme-heo #post-info {
+          animation: none;
+          transition: none;
+        }
       }
 
       /* 路由等待页：参考站点的分栏加载节奏，复用本站蓝色主色 */
@@ -372,7 +573,7 @@ const Style = () => {
 
       #theme-heo .heo-post-card-grid {
         display: flex;
-        height: 24rem;
+        height: 25rem;
         flex-direction: column;
       }
 
@@ -396,6 +597,10 @@ const Style = () => {
       #theme-heo .heo-post-card-body {
         min-width: 0;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 0.65rem;
         padding: 0.9rem 1rem 1rem;
       }
 
@@ -418,7 +623,7 @@ const Style = () => {
       }
 
       #theme-heo .heo-post-card-summary {
-        margin: 0.65rem 0;
+        margin: 0;
         height: 2.7rem;
         min-height: 2.7rem;
         overflow: hidden;
@@ -444,6 +649,7 @@ const Style = () => {
         display: flex;
         min-height: 2.2rem;
         align-items: center;
+        margin-top: 0.25rem;
         gap: 0.35rem;
         overflow: hidden;
         white-space: nowrap;
@@ -663,6 +869,104 @@ const Style = () => {
 
       #theme-heo #category-bar {
         box-shadow: 0 5px 18px rgba(59, 130, 246, 0.05);
+      }
+
+      #theme-heo #home-manifesto {
+        display: grid;
+        grid-template-columns: minmax(12rem, 0.34fr) minmax(0, 1fr);
+        gap: clamp(1.5rem, 4vw, 3.5rem);
+        align-items: center;
+        margin: 0.5rem 0 1.4rem;
+        padding: clamp(1.1rem, 2vw, 1.65rem) 0.75rem;
+      }
+
+      #theme-heo .home-manifesto-heading {
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+      }
+
+      #theme-heo .home-manifesto-mark {
+        display: grid;
+        width: 2.9rem;
+        height: 2.9rem;
+        flex-shrink: 0;
+        place-items: center;
+        border-radius: 50%;
+        color: #ffffff;
+        background: #4f65f0;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 1.35rem;
+        font-weight: 700;
+      }
+
+      #theme-heo .home-manifesto-kicker {
+        margin: 0 0 0.35rem;
+        color: #4f65f0;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        line-height: 1;
+      }
+
+      #theme-heo #home-manifesto-title {
+        margin: 0;
+        color: #172033;
+        font-size: 1.2rem;
+        font-weight: 750;
+        letter-spacing: 0;
+        line-height: 1.3;
+      }
+
+      #theme-heo .home-manifesto-copy {
+        margin: 0;
+        color: #475569;
+        font-size: clamp(0.95rem, 1.2vw, 1.06rem);
+        line-height: 1.9;
+      }
+
+      #theme-heo .home-manifesto-copy strong {
+        color: #172033;
+        font-weight: 750;
+      }
+
+      html.dark #theme-heo #home-manifesto-title,
+      html.dark #theme-heo .home-manifesto-copy strong {
+        color: #f3f4f6;
+      }
+
+      html.dark #theme-heo .home-manifesto-copy {
+        color: #cbd5e1;
+      }
+
+      html.dark #theme-heo .home-manifesto-kicker {
+        color: #93c5fd;
+      }
+
+      @media (max-width: 767px) {
+        #theme-heo #home-manifesto {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+          margin-top: 0.25rem;
+          padding: 1rem 0.25rem 1.25rem;
+        }
+
+        #theme-heo .home-manifesto-copy {
+          font-size: 0.95rem;
+          line-height: 1.85;
+        }
+      }
+
+      #theme-heo .heo-nav-menu-item {
+        gap: 0.45rem;
+      }
+
+      #theme-heo .heo-nav-menu-icon {
+        width: 1.15em;
+        flex-shrink: 0;
+        text-align: center;
+        font-size: 1.08em;
+        line-height: 1;
       }
 
       html.dark #theme-heo .heo-post-card,

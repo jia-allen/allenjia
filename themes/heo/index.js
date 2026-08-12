@@ -32,6 +32,7 @@ import FloatTocButton from './components/FloatTocButton'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import HomeManifesto from './components/HomeManifesto'
 import LatestPostsGroup from './components/LatestPostsGroup'
 import { NoticeBar } from './components/NoticeBar'
 import PostAdjacent from './components/PostAdjacent'
@@ -141,6 +142,7 @@ const LayoutBase = props => {
 const LayoutIndex = props => {
   return (
     <div id='post-outer-wrapper' className='px-5 md:px-0'>
+      <HomeManifesto />
       {/* 文章分类条 */}
       <CategoryBar {...props} />
       {siteConfig('POST_LIST_STYLE') === 'page' ? (

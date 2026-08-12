@@ -60,7 +60,7 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
         )}
 
         {/* 文字区块 */}
-        <div className='heo-post-card-body flex flex-col justify-between'>
+        <div className='heo-post-card-body flex flex-col'>
           <header>
             {/* 分类 */}
             {post?.category && (

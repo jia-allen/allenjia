@@ -22,46 +22,31 @@ export default function PostHeader({ post, siteInfo, isDarkMode, lock }) {
   return (
     <div
       id='post-bg'
-      className='md:mb-0 -mb-5 w-full h-[30rem] relative md:flex-shrink-0 overflow-hidden bg-cover bg-center bg-no-repeat z-10'
+      className='md:mb-0 -mb-5 w-full relative md:flex-shrink-0 overflow-hidden bg-cover bg-center bg-no-repeat z-10'
       style={{
         '--heo-post-bg-accent': isDarkMode
           ? 'var(--heo-color-accent)'
           : 'var(--heo-color-primary)'
       }}>
-      <style jsx>{`
-        .coverdiv:after {
-          position: absolute;
-          content: '';
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          box-shadow: 110px -130px 500px 100px
-            var(--heo-post-bg-accent) inset;
-        }
-      `}</style>
-
-      <div
-        className='absolute top-0 w-full h-full py-10 flex justify-center items-center'
-        style={{ backgroundColor: 'var(--heo-post-bg-accent)' }}>
+      <div className='absolute inset-0 flex items-center justify-center'>
         {/* 文章背景图 */}
         <div
           id='post-cover-wrapper'
-          style={{
-            filter: 'blur(15px)'
-          }}
-          className='coverdiv lg:opacity-50 lg:translate-x-96 lg:rotate-12'>
+          className='absolute inset-0 h-full w-full'>
           <LazyImage
             id='post-cover'
-            className='w-full h-full object-cover max-h-[50rem] min-w-[50vw] min-h-[20rem]'
+            priority
+            className='h-full w-full object-cover object-center'
             src={headerImage}
           />
         </div>
 
+        <div className='post-cover-overlay absolute inset-0' aria-hidden='true' />
+
         {/* 文章文字描述 */}
         <div
           id='post-info'
-          className='absolute top-48 z-10 flex flex-col space-y-4 lg:-mt-12 w-full max-w-[86rem] px-5'>
+          className='absolute inset-x-0 bottom-20 z-10 flex w-full max-w-[86rem] flex-col space-y-4 px-5'>
           {/* 分类+标签 */}
           <div className='flex justify-center md:justify-start items-center gap-4'>
             {post.category && (
@@ -99,7 +84,7 @@ export default function PostHeader({ post, siteInfo, isDarkMode, lock }) {
           </div>
 
           {/* 文章Title */}
-          <div className='max-w-5xl font-bold text-3xl lg:text-5xl md:leading-snug shadow-text-md flex  justify-center md:justify-start text-white'>
+          <div className='max-w-5xl font-bold text-3xl lg:text-5xl md:leading-snug shadow-text-md flex justify-center md:justify-start text-white'>
             {siteConfig('POST_TITLE_ICON') && (
               <NotionIcon icon={post.pageIcon} />
             )}
