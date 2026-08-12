@@ -72,7 +72,7 @@ const BlogPostListScroll = ({
           {' '}
           {postsToShow.map((post, index) => (
             <BlogPostCard
-              index={index}
+              index={(page - 1) * POSTS_PER_PAGE + index}
               key={post.id}
               post={post}
               showSummary={showSummary}

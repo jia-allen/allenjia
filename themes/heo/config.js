@@ -8,7 +8,15 @@ const CONFIG = {
     '/images/heo/reference/post-cover-03.webp',
     '/images/heo/reference/post-cover-04.png',
     '/images/heo/reference/post-cover-05.jpg',
-    '/images/heo/reference/post-cover-06.gif'
+    '/images/heo/reference/post-cover-06.gif',
+    '/images/heo/reference/post-cover-07.webp',
+    '/images/heo/reference/post-cover-08.jpg',
+    '/images/heo/reference/post-cover-09.jpg',
+    '/images/heo/reference/post-cover-10.webp',
+    '/images/heo/reference/post-cover-11.jpg',
+    '/images/heo/reference/post-cover-12.webp',
+    '/images/heo/reference/post-cover-13.webp',
+    '/images/heo/reference/post-cover-14.gif'
   ],
   HEO_LOADING_COVER: true, // 页面加载的遮罩动画
 
