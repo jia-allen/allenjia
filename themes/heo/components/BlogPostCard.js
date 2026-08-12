@@ -26,49 +26,50 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
     true,
     CONFIG
   )
+  const referenceImages = siteConfig('HEO_REFERENCE_POST_IMAGES', [], CONFIG)
+  const useReferenceImages = siteConfig(
+    'HEO_USE_REFERENCE_IMAGES',
+    false,
+    CONFIG
+  )
+  const coverImage =
+    useReferenceImages && referenceImages.length > 0
+      ? referenceImages[index % referenceImages.length]
+      : post?.pageCoverThumbnail || siteInfo?.pageCover
 
   return (
     <article
-      className={`${COVER_HOVER_ENLARGE ? 'hover:transition-all duration-150' : ''}`}>
+      className={`heo-post-card-shell ${COVER_HOVER_ENLARGE ? 'hover:transition-all duration-150' : ''}`}
+    >
       <div
         data-wow-delay='.2s'
-        className={
-          (POST_TWO_COLS ? '2xl:h-96 2xl:flex-col' : '') +
-          ' wow fadeInUp border bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)] flex mb-4 flex-col h-[23rem] md:h-52 md:flex-row  group w-full dark:border-gray-600 hover:border-[var(--heo-color-border)] dark:hover:border-[var(--heo-color-border-dark)] duration-300 transition-colors justify-between overflow-hidden rounded-xl'
-        }>
+        className={`heo-post-card ${POST_TWO_COLS ? 'heo-post-card-grid' : 'heo-post-card-list'} wow fadeInUp group`}
+      >
         {/* 图片封面 */}
-        {showPageCover && (
+        {(showPageCover || coverImage) && (
           <SmartLink href={post?.href} passHref legacyBehavior>
-            <div
-              className={
-                (POST_TWO_COLS ? ' 2xl:w-full' : '') +
-                ' w-full md:w-5/12 overflow-hidden cursor-pointer select-none'
-              }>
+            <div className='heo-post-card-cover overflow-hidden cursor-pointer select-none'>
               <LazyImage
                 priority={index === 0}
-                src={post?.pageCoverThumbnail}
+                src={coverImage}
                 alt={post?.title}
-                className='h-full w-full object-cover group-hover:scale-105 group-hover:brightness-75 transition-all duration-500 ease-in-out' //宽高都调整为自适应,保证封面居中
+                className='h-full w-full object-cover group-hover:scale-105 transition-all duration-500 ease-in-out'
               />
             </div>
           </SmartLink>
         )}
 
         {/* 文字区块 */}
-        <div
-          className={
-            (POST_TWO_COLS ? '2xl:p-4 2xl:h-48 2xl:w-full' : '') +
-            ' flex p-6  flex-col justify-between h-48 md:h-full w-full md:w-7/12'
-          }>
+        <div className='heo-post-card-body flex flex-col justify-between'>
           <header>
             {/* 分类 */}
             {post?.category && (
-              <div
-                className={`flex mb-1 items-center ${showPreview ? 'justify-center' : 'justify-start'} hidden md:block flex-wrap dark:text-gray-300 text-gray-600 hover:text-[var(--heo-color-primary)] dark:hover:text-[var(--heo-color-accent)]`}>
+              <div className='heo-post-card-category flex mb-1 items-center flex-wrap dark:text-gray-300 text-gray-600 hover:text-[var(--heo-color-primary)] dark:hover:text-[var(--heo-color-accent)]'>
                 <SmartLink
                   passHref
                   href={`/category/${post.category}`}
-                  className='cursor-pointer text-xs font-normal menu-link '>
+                  className='cursor-pointer text-xs font-normal menu-link '
+                >
                   {post.category}
                 </SmartLink>
               </div>
@@ -79,13 +80,14 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
               href={post?.href}
               passHref
               className={
-                ' group-hover:text-[var(--heo-color-primary)] dark:hover:text-[var(--heo-color-accent)] dark:group-hover:text-[var(--heo-color-accent)] text-black dark:text-gray-100  line-clamp-2 replace cursor-pointer text-xl font-extrabold leading-tight'
-              }>
+                'heo-post-card-title group-hover:text-[var(--heo-color-primary)] dark:hover:text-[var(--heo-color-accent)] dark:group-hover:text-[var(--heo-color-accent)] text-black dark:text-gray-100 line-clamp-2 replace cursor-pointer font-extrabold leading-tight'
+              }
+            >
               {siteConfig('POST_TITLE_ICON') && (
                 <NotionIcon
-                icon={post.pageIcon}
-                className="heo-icon w-6 h-6 mr-1 align-middle transform translate-y-[-8%]" // 专门为 Heo 主题的图标设置样式
-              />
+                  icon={post.pageIcon}
+                  className='heo-icon w-6 h-6 mr-1 align-middle transform translate-y-[-8%]' // 专门为 Heo 主题的图标设置样式
+                />
               )}
               <span className='menu-link '>{post.title}</span>
             </SmartLink>
@@ -93,20 +95,20 @@ const BlogPostCard = ({ index, post, showSummary, siteInfo }) => {
 
           {/* 摘要 */}
           {(!showPreview || showSummary) && (
-            <main className='line-clamp-2 replace text-gray-700  dark:text-gray-300 text-sm font-light leading-tight'>
+            <main className='heo-post-card-summary line-clamp-2 replace text-gray-700 dark:text-gray-300 text-sm font-light leading-tight'>
               {post.summary}
             </main>
           )}
 
-          <div className='md:flex-nowrap flex-wrap md:justify-start inline-block'>
-            <div>
-              {' '}
-              {post.tagItems?.map(tag => (
-                <TagItemMini key={tag.name} tag={tag} />
-              ))}
-            </div>
+          <div className='heo-post-card-tags'>
+            {post.tagItems?.map(tag => (
+              <TagItemMini key={tag.name} tag={tag} />
+            ))}
           </div>
         </div>
+        {post.tags?.includes('推荐') && (
+          <span className='heo-post-card-badge'>荐</span>
+        )}
       </div>
     </article>
   )

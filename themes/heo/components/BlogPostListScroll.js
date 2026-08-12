@@ -67,10 +67,12 @@ const BlogPostListScroll = ({
       <div id='container' ref={targetRef} className='w-full'>
         {/* 文章列表 */}
         <div
-          className={`${POST_TWO_COLS && '2xl:grid 2xl:grid-cols-2'} grid-cols-1 gap-5`}>
+          className={`${POST_TWO_COLS && 'xl:grid xl:grid-cols-2'} grid-cols-1 gap-5`}
+        >
           {' '}
-          {postsToShow.map(post => (
+          {postsToShow.map((post, index) => (
             <BlogPostCard
+              index={index}
               key={post.id}
               post={post}
               showSummary={showSummary}
@@ -85,7 +87,8 @@ const BlogPostListScroll = ({
             onClick={() => {
               handleGetMore()
             }}
-            className='w-full my-4 py-4 text-center cursor-pointer rounded-xl dark:text-gray-200'>
+            className='w-full my-4 py-4 text-center cursor-pointer rounded-xl dark:text-gray-200'
+          >
             {' '}
             {hasMore ? locale.COMMON.MORE : `${locale.COMMON.NO_MORE}`}{' '}
           </div>

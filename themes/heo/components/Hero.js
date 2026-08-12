@@ -20,12 +20,14 @@ const Hero = props => {
   return (
     <div
       id='hero-wrapper'
-      className='recent-top-post-group w-full overflow-hidden select-none px-5 mb-4'>
+      className='recent-top-post-group w-full overflow-hidden select-none px-5 mb-4'
+    >
       <div
         id='hero'
         style={{ zIndex: 1 }}
         className={`${HEO_HERO_REVERSE ? 'xl:flex-row-reverse' : ''}
-           recent-post-top rounded-[12px] 2xl:px-5 recent-top-post-group max-w-[86rem] overflow-x-scroll w-full mx-auto flex-row flex-nowrap flex relative`}>
+           recent-post-top rounded-[12px] px-5 recent-top-post-group max-w-[86rem] overflow-x-scroll w-full mx-auto flex-row flex-nowrap flex relative`}
+      >
         {/* 左侧banner组 */}
         <BannerGroup {...props} />
 
@@ -48,7 +50,8 @@ function BannerGroup(props) {
     // 左侧英雄区
     <div
       id='bannerGroup'
-      className='flex flex-col justify-between flex-1 mr-2 max-w-[42rem]'>
+      className='flex flex-col justify-between flex-1 mr-2 max-w-[42rem]'
+    >
       {/* 动图 */}
       <Banner {...props} />
       {/* 导航分类 */}
@@ -80,10 +83,12 @@ function Banner(props) {
     <div
       id='banners'
       onClick={handleClickBanner}
-        className='hidden xl:flex xl:flex-col group h-full bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)] rounded-xl border dark:border-gray-700 mb-3 relative overflow-hidden'>
+      className='hidden xl:flex xl:flex-col group h-full bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)] rounded-xl mb-3 relative overflow-hidden'
+    >
       <div
         id='banner-title'
-        className='z-10 flex flex-col absolute top-10 left-10'>
+        className='z-10 flex flex-col absolute top-10 left-10'
+      >
         <div className='text-4xl font-bold mb-3  dark:text-white'>
           {siteConfig('HEO_HERO_TITLE_1', null, CONFIG)}
           <br />
@@ -103,7 +108,8 @@ function Banner(props) {
         style={{ backdropFilter: 'blur(15px)' }}
         className={
           'z-20 rounded-xl overflow-hidden opacity-0 group-hover:opacity-100 duration-300 transition-all bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)] dark:text-white cursor-pointer absolute w-full h-full top-0 flex justify-start items-center'
-        }>
+        }
+      >
         <div className='ml-12 -translate-x-32 group-hover:translate-x-0 duration-300 transition-all ease-in'>
           <div className='text-7xl text-white font-extrabold'>{coverTitle}</div>
           <div className='-ml-3 text-gray-300'>
@@ -134,7 +140,8 @@ function TagsGroupBar() {
                 style={{ background: g.color_1 }}
                 className={
                   'tags-group-icon w-28 h-28 rounded-3xl flex items-center justify-center text-white text-lg font-bold shadow-md'
-                }>
+                }
+              >
                 <LazyImage
                   priority={true}
                   src={g.img_1}
@@ -146,7 +153,8 @@ function TagsGroupBar() {
                 style={{ background: g.color_2 }}
                 className={
                   'tags-group-icon  mt-5 w-28 h-28 rounded-3xl flex items-center justify-center text-white text-lg font-bold shadow-md'
-                }>
+                }
+              >
                 <LazyImage
                   priority={true}
                   src={g.img_2}
@@ -178,7 +186,8 @@ function GroupMenu() {
     <div className='h-[165px] select-none xl:h-20 flex flex-col justify-between xl:space-y-0 xl:flex-row w-28 lg:w-48 xl:w-full xl:flex-nowrap xl:space-x-3'>
       <SmartLink
         href={url_1}
-        className='group relative overflow-hidden bg-[var(--heo-color-primary)] flex h-20 justify-start items-center text-[var(--heo-color-primary-text)] rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'>
+        className='group relative overflow-hidden bg-[var(--heo-color-primary)] flex h-20 justify-start items-center text-[var(--heo-color-primary-text)] rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'
+      >
         <div className='font-bold lg:text-lg  pl-5 relative -mt-2'>
           {title_1}
           <span className='absolute -bottom-0.5 left-5 w-5 h-0.5 bg-white rounded-full'></span>
@@ -189,7 +198,8 @@ function GroupMenu() {
       </SmartLink>
       <SmartLink
         href={url_2}
-        className='group relative overflow-hidden bg-gradient-to-r from-red-500 to-yellow-500 flex h-20 justify-start items-center text-white rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'>
+        className='group relative overflow-hidden bg-gradient-to-r from-red-500 to-yellow-500 flex h-20 justify-start items-center text-white rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'
+      >
         <div className='font-bold lg:text-lg pl-5 relative -mt-2'>
           {title_2}
           <span className='absolute -bottom-0.5 left-5 w-5 h-0.5 bg-white rounded-full'></span>
@@ -201,7 +211,8 @@ function GroupMenu() {
       {/* 第三个标签在小屏上不显示 */}
       <SmartLink
         href={url_3}
-        className='group relative overflow-hidden bg-gradient-to-r from-teal-300 to-cyan-300 hidden h-20 xl:flex justify-start items-center text-white rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'>
+        className='group relative overflow-hidden bg-gradient-to-r from-teal-300 to-cyan-300 hidden h-20 xl:flex justify-start items-center text-white rounded-xl xl:hover:w-1/2 xl:w-1/3 transition-all duration-500 ease-in'
+      >
         <div className='font-bold text-lg pl-5 relative -mt-2'>
           {title_3}
           <span className='absolute -bottom-0.5 left-5 w-5 h-0.5 bg-white rounded-full'></span>
@@ -227,25 +238,40 @@ function TopGroup(props) {
 
   // 获取置顶推荐文章
   const topPosts = getTopPosts({ latestPosts, allNavPages })
+  const referenceImages = siteConfig('HEO_REFERENCE_POST_IMAGES', [], CONFIG)
+  const useReferenceImages = siteConfig(
+    'HEO_USE_REFERENCE_IMAGES',
+    false,
+    CONFIG
+  )
 
   return (
     <div
       id='hero-right-wrapper'
       onMouseLeave={handleMouseLeave}
-      className='flex-1 relative w-full'>
+      className='flex-1 relative w-full'
+    >
       {/* 置顶推荐文章 */}
       <div
         id='top-group'
-        className='w-full flex space-x-3 xl:space-x-0 xl:grid xl:grid-cols-3 xl:gap-3 xl:h-[342px]'>
+        className='w-full flex space-x-3 xl:space-x-0 xl:grid xl:grid-cols-3 xl:gap-3 xl:h-[342px]'
+      >
         {topPosts?.map((p, index) => {
           return (
-            <SmartLink href={`${siteConfig('SUB_PATH', '')}/${p?.slug}`} key={index}>
-              <div className='cursor-pointer h-[164px] group relative flex flex-col w-52 xl:w-full overflow-hidden shadow bg-white dark:bg-black dark:text-white rounded-xl'>
+            <SmartLink
+              href={`${siteConfig('SUB_PATH', '')}/${p?.slug}`}
+              key={index}
+            >
+              <div className='heo-hero-post cursor-pointer h-[164px] group relative flex flex-col w-52 xl:w-full overflow-hidden shadow bg-white dark:bg-black dark:text-white rounded-xl'>
                 <LazyImage
                   priority={index === 0}
                   className='h-24 object-cover'
                   alt={p?.title}
-                  src={p?.pageCoverThumbnail || siteInfo?.pageCover}
+                  src={
+                    useReferenceImages && referenceImages.length > 0
+                      ? referenceImages[index % referenceImages.length]
+                      : p?.pageCoverThumbnail || siteInfo?.pageCover
+                  }
                 />
                 <div className='group-hover:text-[var(--heo-color-primary)] dark:group-hover:text-[var(--heo-color-accent)] line-clamp-2 overflow-hidden m-2 font-semibold'>
                   {p?.title}
@@ -316,12 +342,16 @@ function getTopPosts({ latestPosts, allNavPages }) {
  * 英雄区右侧，今日卡牌
  * @returns
  */
-function TodayCard({ cRef, siteInfo }) {
+function TodayCard({ cRef }) {
   const router = useRouter()
   const link = siteConfig('HEO_HERO_TITLE_LINK', null, CONFIG)
   const { locale } = useGlobal()
   // 获取遮罩控制配置
-  const coverEnable = siteConfig('HEO_HERO_RECOMMEND_COVER_ENABLE', true, CONFIG)
+  const coverEnable = siteConfig(
+    'HEO_HERO_RECOMMEND_COVER_ENABLE',
+    true,
+    CONFIG
+  )
   // 卡牌是否盖住下层，如果配置为false则默认不盖住
   const [isCoverUp, setIsCoverUp] = useState(coverEnable)
 
@@ -365,7 +395,8 @@ function TodayCard({ cRef, siteInfo }) {
       id='today-card'
       className={`${
         isCoverUp ? ' ' : 'pointer-events-none'
-      } overflow-hidden absolute hidden xl:flex flex-1 flex-col h-full top-0 w-full`}>
+      } overflow-hidden absolute hidden xl:flex flex-1 flex-col h-full top-0 w-full`}
+    >
       <div
         id='card-body'
         onClick={handleCardClick}
@@ -373,46 +404,111 @@ function TodayCard({ cRef, siteInfo }) {
           isCoverUp
             ? 'opacity-100 cursor-pointer'
             : 'opacity-0 transform scale-110 pointer-events-none'
-        } shadow transition-all duration-200 today-card h-full bg-black rounded-xl relative overflow-hidden flex items-end`}>
-        {/* 卡片文字信息 */}
+        } shadow transition-all duration-200 today-card h-full bg-black rounded-xl relative overflow-hidden flex items-end`}
+      >
+        {/* 彩色手写 Hello 图形 */}
         <div
-          id='today-card-info'
-          className='flex justify-between w-full relative text-white p-10 items-end'>
-          <div className='flex flex-col'>
-            <div className='text-xs font-light'>
-              {siteConfig('HEO_HERO_TITLE_4', null, CONFIG)}
-            </div>
-            <div className='text-3xl font-bold'>
-              {siteConfig('HEO_HERO_TITLE_5', null, CONFIG)}
-            </div>
-          </div>
-          {/* 查看更多的按钮 */}
-          <div
-            onClick={handleClickShowMore}
-            className={`'${isCoverUp ? '' : 'hidden pointer-events-none'} z-10 group flex items-center px-3 h-10 justify-center  rounded-3xl
-            glassmorphism transition-colors duration-100 `}>
-            <PlusSmall
-              className={
-                'group-hover:rotate-180 duration-500 transition-all w-6 h-6 mr-2 bg-white rounded-full stroke-black'
-              }
-            />
-            <div id='more' className='select-none'>
-              {locale.COMMON.RECOMMEND_POSTS}
-            </div>
-          </div>
-        </div>
-
-        {/* 封面图 */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={siteInfo?.pageCover}
           id='today-card-cover'
           className={`${
             isCoverUp ? '' : ' pointer-events-none'
-          } hover:scale-110 duration-1000 object-cover cursor-pointer today-card-cover absolute w-full h-full top-0`}
-        />
+          } today-card-cover absolute inset-0`}
+        >
+          <HelloGraphic />
+        </div>
+
+        {/* 卡片文字信息 */}
+        <div
+          id='today-card-info'
+          className='absolute left-8 bottom-8 z-[2] max-w-[60%]'
+        >
+          <div id='today-card-tips'>
+            {siteConfig('HEO_HERO_TITLE_4', null, CONFIG)}
+          </div>
+          <div id='today-card-title'>
+            {siteConfig('HEO_HERO_TITLE_5', null, CONFIG)}
+          </div>
+        </div>
+
+        {/* 查看更多的按钮 */}
+        <button
+          type='button'
+          id='today-card-more-button'
+          onClick={handleClickShowMore}
+          aria-label={locale.COMMON.RECOMMEND_POSTS}
+          className={`${
+            isCoverUp ? '' : 'hidden pointer-events-none'
+          } absolute right-8 bottom-8 z-[5] flex items-center justify-center`}
+        >
+          <PlusSmall className='today-card-more-icon' />
+          <div id='more' className='select-none'>
+            {locale.COMMON.RECOMMEND_POSTS}
+          </div>
+        </button>
       </div>
     </div>
+  )
+}
+
+function HelloGraphic() {
+  return (
+    <svg
+      id='today-card-cover-image'
+      viewBox='0 0 500 500'
+      width='500'
+      height='500'
+      role='img'
+      aria-label='生活明朗 万物可爱'
+      preserveAspectRatio='xMidYMid meet'
+    >
+      <defs>
+        <clipPath id='heo-hello-inline-clip'>
+          <rect width='500' height='500' x='0' y='0' />
+        </clipPath>
+        <linearGradient
+          id='heo-hello-inline-gradient'
+          spreadMethod='pad'
+          gradientUnits='userSpaceOnUse'
+          x1='-135'
+          y1='19'
+          x2='134.5'
+          y2='-3'
+        >
+          <stop offset='0%' stopColor='rgb(0,145,150)' />
+          <stop offset='5%' stopColor='rgb(47,157,173)' />
+          <stop offset='11%' stopColor='rgb(94,169,197)' />
+          <stop offset='17%' stopColor='rgb(142,205,130)' />
+          <stop offset='23%' stopColor='rgb(189,241,63)' />
+          <stop offset='30%' stopColor='rgb(222,227,40)' />
+          <stop offset='37%' stopColor='rgb(255,213,16)' />
+          <stop offset='42%' stopColor='rgb(255,197,28)' />
+          <stop offset='48%' stopColor='rgb(255,182,40)' />
+          <stop offset='54%' stopColor='rgb(255,136,37)' />
+          <stop offset='61%' stopColor='rgb(255,91,34)' />
+          <stop offset='67%' stopColor='rgb(255,68,129)' />
+          <stop offset='74%' stopColor='rgb(255,45,223)' />
+          <stop offset='81%' stopColor='rgb(164,115,233)' />
+          <stop offset='88%' stopColor='rgb(73,185,243)' />
+          <stop offset='94%' stopColor='rgb(57,189,247)' />
+          <stop offset='100%' stopColor='rgb(40,193,250)' />
+        </linearGradient>
+      </defs>
+      <g clipPath='url(#heo-hello-inline-clip)'>
+        <g transform='matrix(1.677001,0,0,1.677001,-168.750244,-165.744461)'>
+          <g transform='matrix(1,0,0,1,252,245.917999)'>
+            <path
+              className='heo-hello-stroke is-playing'
+              pathLength='1000'
+              stroke='url(#heo-hello-inline-gradient)'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              fill='none'
+              strokeWidth='9'
+              d='M-136.566 38.128C-119.717 27.103-85.061 1.308-81.851-26.162C-79.424-46.943-98.573-44.137-101.426-23.013C-103.757-5.755-109.596 40.561-109.596 40.561C-109.596 40.561-103.979-.034-85.851 1.753C-65.936 4.083-91.978 40.05-68.999 40.305C-48.572 40.532-27.639 22.688-26.873 10.943C-25.99-2.599-44.362-4.886-50.022 11.966C-55.226 27.461-43.584 44.902-23.54 40.581C7.341 33.922 22.483-10.827 23.936-26.077C25.467-42.162 13.723-43.694 6.574-29.397C-.104-16.04-11.245 37.085 12.958 41.583C41.809 46.944 64.277-5.906 67.086-23.779C69.802-41.066 58.656-45.952 50.234-30.673C41.166-14.223 27.843 44.077 59.937 41.326C86.746 39.028 76.916 2.263 102.898-.05C114.562-1.088 119.386 9.921 118.532 21.029C117.638 32.646 106.66 42.475 95.809 40.943C85.898 39.544 80.838 25.973 83.425 17.072C86.617 6.094 96.662.12 102.898-.05C111.766-.29 116.234 5.327 124.149 5.199C131.179 5.086 136.712-1.363 136.712-1.363'
+            />
+          </g>
+        </g>
+      </g>
+    </svg>
   )
 }
 

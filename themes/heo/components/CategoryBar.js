@@ -10,7 +10,7 @@ import { useRef, useState } from 'react'
  * @returns
  */
 export default function CategoryBar(props) {
-  const { categoryOptions, border = true } = props
+  const { categoryOptions } = props
   const { locale } = useGlobal()
   const [scrollRight, setScrollRight] = useState(false)
   // 创建一个ref引用
@@ -33,11 +33,13 @@ export default function CategoryBar(props) {
     <div
       id='category-bar'
       className={`wow fadeInUp flex flex-nowrap justify-between items-center h-12 mb-4 space-x-2 w-full lg:bg-[var(--heo-color-card)] dark:lg:bg-[var(--heo-color-card-dark)]
-            ${border ? 'lg:border lg:hover:border dark:lg:border-gray-800 hover:border-[var(--heo-color-border)] dark:hover:border-[var(--heo-color-border-dark)] ' : ''}  py-2 lg:px-2 rounded-xl transition-colors duration-200`}>
+            py-2 lg:px-2 rounded-xl transition-colors duration-200`}
+    >
       <div
         id='category-bar-items'
         ref={categoryBarItemsRef}
-        className='scroll-smooth max-w-4xl rounded-lg scroll-hidden flex justify-start flex-nowrap items-center overflow-x-scroll'>
+        className='scroll-smooth max-w-4xl rounded-lg scroll-hidden flex justify-start flex-nowrap items-center overflow-x-scroll'
+      >
         <MenuItem href='/' name={locale.NAV.INDEX} />
         {categoryOptions?.map((c, index) => (
           <MenuItem key={index} href={`/category/${c.name}`} name={c.name} />
@@ -48,7 +50,8 @@ export default function CategoryBar(props) {
         <div
           id='right'
           className='cursor-pointer mx-2 dark:text-gray-300 dark:hover:text-[var(--heo-color-accent)] hover:text-[var(--heo-color-primary)]'
-          onClick={handleToggleScroll}>
+          onClick={handleToggleScroll}
+        >
           {scrollRight ? (
             <ChevronDoubleLeft className={'w-5 h-5'} />
           ) : (
@@ -57,7 +60,8 @@ export default function CategoryBar(props) {
         </div>
         <SmartLink
           href='/category'
-          className='whitespace-nowrap font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-[var(--heo-color-primary)] dark:hover:text-[var(--heo-color-accent)]'>
+          className='whitespace-nowrap font-bold text-gray-900 dark:text-white transition-colors duration-200 hover:text-[var(--heo-color-primary)] dark:hover:text-[var(--heo-color-accent)]'
+        >
           {locale.MENU.CATEGORY}
         </SmartLink>
       </div>
@@ -76,7 +80,8 @@ const MenuItem = ({ href, name }) => {
   const selected = category === name
   return (
     <div
-      className={`whitespace-nowrap mr-2 duration-200 transition-all font-bold px-2 py-0.5 rounded-md text-gray-900 dark:text-white hover:text-[var(--heo-color-primary-text)] hover:bg-[var(--heo-color-primary)] dark:hover:bg-[var(--heo-color-accent)] ${selected ? 'text-[var(--heo-color-primary-text)] bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)]' : ''}`}>
+      className={`whitespace-nowrap mr-2 duration-200 transition-all font-bold px-2 py-0.5 rounded-md text-gray-900 dark:text-white hover:text-[var(--heo-color-primary-text)] hover:bg-[var(--heo-color-primary)] dark:hover:bg-[var(--heo-color-accent)] ${selected ? 'text-[var(--heo-color-primary-text)] bg-[var(--heo-color-primary)] dark:bg-[var(--heo-color-accent)]' : ''}`}
+    >
       <SmartLink href={href}>{name}</SmartLink>
     </div>
   )

@@ -105,8 +105,8 @@ HEO_HOME_BANNER_ENABLE: true,
 HEO_SITE_CREATE_TIME: '2024-05-09',
 HEO_HERO_CATEGORY_1: { title: '必看精选', url: '/tag/必看精选' },
 HEO_NOTICE_BAR: [
-  { title: '欢迎来到我的博客', url: '/user-guide/intro' },
-  { title: '访问文档中心获取更多帮助', url: '/user-guide/intro' }
+  { title: '👋Hi，欢迎来到宝的博客✨', url: '/user-guide/intro' },
+  { title: 'Ctrl＋D收藏本站不迷路', url: '/user-guide/intro' }
 ],
 ```
 
