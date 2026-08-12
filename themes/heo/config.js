@@ -13,6 +13,7 @@ const CONFIG = {
   HEO_LOADING_COVER: true, // 页面加载的遮罩动画
 
   HEO_HOME_BANNER_ENABLE: true,
+  HEO_NAV_SCROLL_TITLE: 'Allen（爱伦）| 宝的个人博客',
 
   HEO_INFO_CARD_AVATAR_BLUR: true, // 文章详情页个人资料卡头像样式。true：显示为模糊装饰头像；false：与首页头像保持一致
 
@@ -67,15 +68,12 @@ const CONFIG = {
   // 英雄区右侧推荐文章遮罩控制
   HEO_HERO_RECOMMEND_COVER_ENABLE: true, // 是否显示推荐文章遮罩图片，true显示遮罩需点击查看，false直接显示推荐文章
 
-  // 右侧个人资料卡牌欢迎语，点击可自动切换
-  HEO_INFOCARD_GREETINGS: [
-    '你好！我是',
-    '🔍 分享与热心帮助',
-    '🤝 专修交互与设计',
-    '🏃 脚踏实地行动派',
-    '🏠 智能家居小能手',
-    '🤖️ 数码科技爱好者',
-    '🧱 团队小组发动机'
+  // 右侧「知行录」入口卡片
+  HEO_INFOCARD_GREETINGS: ['知与行之间'],
+  HEO_INFO_CARD_TITLE: '知行录',
+  HEO_INFO_CARD_DESCRIPTION: [
+    '写下来的，才是自己的。',
+    '知行合一，行稳致远。'
   ],
 
   // 个人资料底部按钮
@@ -84,8 +82,8 @@ const CONFIG = {
   HEO_INFO_CARD_URL2: 'https://github.com/tangly1024',
   HEO_INFO_CARD_ICON2: 'fab fa-github',
   HEO_INFO_CARD_ICON_ORCID: 'fab fa-orcid',
-  HEO_INFO_CARD_URL3: 'https://www.tangly1024.com',
-  HEO_INFO_CARD_TEXT3: '了解更多',
+  HEO_INFO_CARD_URL3: '/archive',
+  HEO_INFO_CARD_TEXT3: '查看合集',
 
   // 用户技能图标
   HEO_GROUP_ICONS: [

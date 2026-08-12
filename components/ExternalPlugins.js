@@ -22,7 +22,7 @@ import { getPageCanCopy } from '@/lib/utils/copyPermission'
 const ExternalPlugin = props => {
   // 读取自Notion的配置
   const { NOTION_CONFIG } = props
-  const { lang } = useGlobal()
+  const { lang, theme } = useGlobal()
   const [pluginsIdle, setPluginsIdle] = useState(false)
   const DISABLE_PLUGIN = siteConfig('DISABLE_PLUGIN', null, NOTION_CONFIG)
   const THEME_SWITCH = siteConfig('THEME_SWITCH', null, NOTION_CONFIG)
@@ -245,7 +245,8 @@ const ExternalPlugin = props => {
       <GlobalStyle />
       {ENABLE_ICON_FONT && <IconFont />}
       {MOUSE_FOLLOW && <MouseFollow />}
-      {pluginsIdle && THEME_SWITCH && <ThemeSwitch />}
+      {/* Heo 页面将主题调节收入口隐藏，暗黑模式由顶部导航提供 */}
+      {pluginsIdle && THEME_SWITCH && theme !== 'heo' && <ThemeSwitch />}
       {DEBUG && <DebugPanel />}
       {ANALYTICS_ACKEE_TRACKER && <Ackee />}
       {ANALYTICS_GOOGLE_ID && <Gtag />}

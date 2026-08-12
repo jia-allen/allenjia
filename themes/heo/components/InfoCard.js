@@ -5,7 +5,6 @@ import SmartLink from '@/components/SmartLink'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import CONFIG from '../config'
-import Announcement from './Announcement'
 import Card from './Card'
 
 export function normalizeInfoCardGreetings(value) {
@@ -48,7 +47,7 @@ export function shouldUseInfoCardBlurAvatar(isSlugPage, avatarBlurEnabled) {
  * @returns
  */
 export function InfoCard(props) {
-  const { siteInfo, notice } = props
+  const { siteInfo } = props
   const router = useRouter()
   // 在文章详情页特殊处理
   const isSlugPage = router.pathname.indexOf('/[prefix]') === 0
@@ -56,6 +55,12 @@ export function InfoCard(props) {
   const icon1 = siteConfig('HEO_INFO_CARD_ICON1', null, CONFIG)
   const url2 = siteConfig('HEO_INFO_CARD_URL2', null, CONFIG)
   const icon2 = siteConfig('HEO_INFO_CARD_ICON2', null, CONFIG)
+  const cardTitle = siteConfig('HEO_INFO_CARD_TITLE', '知行录', CONFIG)
+  const cardDescription = siteConfig(
+    'HEO_INFO_CARD_DESCRIPTION',
+    ['写下来的，才是自己的。', '知行合一，行稳致远。'],
+    CONFIG
+  )
   const orcidUrl = siteConfig('CONTACT_ORCID')
   const orcidIcon = siteConfig('HEO_INFO_CARD_ICON_ORCID', 'fab fa-orcid', CONFIG)
   const avatarBlurEnabled = siteConfig(
@@ -90,10 +95,14 @@ export function InfoCard(props) {
         </div>
       </div>
 
-      <h2 className='text-3xl font-extrabold mt-3'>{siteConfig('AUTHOR')}</h2>
+      <h2 className='text-3xl font-extrabold mt-3'>{cardTitle}</h2>
 
-      {/* 公告栏 */}
-      <Announcement post={notice} style={{ color: 'white !important' }} />
+      {/* 知行录简介，不再把 Notion 公告当作卡片正文 */}
+      <div className='heo-info-card-copy'>
+        {cardDescription.map(line => (
+          <p key={line}>{line}</p>
+        ))}
+      </div>
 
       <div className='flex justify-between'>
         <div className='flex space-x-3  hover:text-black dark:hover:text-white'>

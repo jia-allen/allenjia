@@ -303,6 +303,26 @@ const Style = () => {
         line-height: 1.55;
       }
 
+      #theme-heo .heo-info-card-copy {
+        display: flex;
+        min-height: 4.5rem;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.45rem;
+        margin: 1.15rem 0 1.4rem;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+
+      #theme-heo .heo-info-card-copy p {
+        margin: 0;
+      }
+
+      #theme-heo #nav-actions > div {
+        flex-shrink: 0;
+      }
+
       html.dark #theme-heo #archive-intro h1 {
         color: #f8fafc;
       }

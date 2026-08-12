@@ -3,6 +3,7 @@ import { isBrowser } from '@/lib/utils'
 import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import CONFIG from '../config'
 import DarkModeButton from './DarkModeButton'
 import Logo from './Logo'
 import { MenuListTop } from './MenuListTop'
@@ -10,6 +11,7 @@ import RandomPostButton from './RandomPostButton'
 import ReadingProgress from './ReadingProgress'
 import SearchButton from './SearchButton'
 import SlideOver from './SlideOver'
+import { useGlobal } from '@/lib/global'
 
 /**
  * 页头：顶部导航
@@ -17,6 +19,7 @@ import SlideOver from './SlideOver'
  * @returns
  */
 const Header = props => {
+  const { theme } = useGlobal()
   const [fixedNav, setFixedNav] = useState(false)
   const [textWhite, setTextWhite] = useState(false)
   const [navBgWhite, setBgWhite] = useState(false)
@@ -171,20 +174,24 @@ const Header = props => {
             <div
               className={`absolute transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0' : '-mb-20 opacity-0 invisible'}`}>
               <h1 className='font-bold text-center text-light-400 dark:text-gray-400'>
-                {siteConfig('AUTHOR') || siteConfig('TITLE')}{' '}
-                {siteConfig('BIO') && <>|</>} {siteConfig('BIO')}
+                {siteConfig(
+                  'HEO_NAV_SCROLL_TITLE',
+                  `${siteConfig('AUTHOR') || siteConfig('TITLE')} | ${siteConfig('BIO')}`,
+                  CONFIG
+                )}
               </h1>
             </div>
           </div>
 
           {/* 右侧固定 */}
-          <div className='flex flex-shrink-0 justify-end items-center w-48'>
+          <div
+            id='nav-actions'
+            className='flex flex-shrink-0 justify-end items-center gap-1 rounded-full bg-white/80 dark:bg-[var(--heo-color-card-dark)] px-1.5 shadow-sm w-auto'
+          >
             <RandomPostButton {...props} />
             <SearchButton {...props} />
-            {!JSON.parse(siteConfig('THEME_SWITCH')) && (
-              <div className='hidden md:block'>
-                <DarkModeButton {...props} />
-              </div>
+            {(theme === 'heo' || !siteConfig('THEME_SWITCH', false)) && (
+              <DarkModeButton {...props} />
             )}
             <ReadingProgress />
 
