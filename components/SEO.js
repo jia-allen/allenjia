@@ -72,7 +72,11 @@ const SEO = props => {
   const category = Array.isArray(meta?.category)
     ? meta?.category?.[0]
     : meta?.category || KEYWORDS // section 主要是像是 category 這樣的分類，Facebook 用這個來抓連結的分類
-  const favicon = siteConfig('BLOG_FAVICON')
+  const activeTheme = siteConfig('THEME', null, NOTION_CONFIG)
+  const favicon =
+    activeTheme === 'heo'
+      ? '/wechat-avatar-favicon.png'
+      : siteConfig('BLOG_FAVICON')
   const BACKGROUND_DARK = siteConfig('BACKGROUND_DARK', '', NOTION_CONFIG)
 
   const SEO_BAIDU_SITE_VERIFICATION = siteConfig(
@@ -86,8 +90,6 @@ const SEO = props => {
     null,
     NOTION_CONFIG
   )
-
-  const BLOG_FAVICON = siteConfig('BLOG_FAVICON', null, NOTION_CONFIG)
 
   const COMMENT_WEBMENTION_ENABLE = siteConfig(
     'COMMENT_WEBMENTION_ENABLE',
@@ -181,7 +183,7 @@ const SEO = props => {
       <meta name='twitter:image' content={image} />
       <meta name='twitter:image:alt' content={title} />
 
-      <link rel='icon' href={BLOG_FAVICON} />
+      <link rel='icon' href={favicon} />
 
       {COMMENT_WEBMENTION_ENABLE && (
         <>

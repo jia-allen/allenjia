@@ -47,7 +47,6 @@ export function shouldUseInfoCardBlurAvatar(isSlugPage, avatarBlurEnabled) {
  * @returns
  */
 export function InfoCard(props) {
-  const { siteInfo } = props
   const router = useRouter()
   // 在文章详情页特殊处理
   const isSlugPage = router.pathname.indexOf('/[prefix]') === 0
@@ -55,6 +54,7 @@ export function InfoCard(props) {
   const icon1 = siteConfig('HEO_INFO_CARD_ICON1', null, CONFIG)
   const url2 = siteConfig('HEO_INFO_CARD_URL2', null, CONFIG)
   const icon2 = siteConfig('HEO_INFO_CARD_ICON2', null, CONFIG)
+  const avatar = siteConfig('HEO_PROFILE_AVATAR', null, CONFIG)
   const cardTitle = siteConfig('HEO_INFO_CARD_TITLE', '知行录', CONFIG)
   const cardDescription = siteConfig(
     'HEO_INFO_CARD_DESCRIPTION',
@@ -86,8 +86,8 @@ export function InfoCard(props) {
               : 'cursor-pointer'
           } justify-center items-center flex dark:text-gray-100 transform transition-all duration-200`}>
           <LazyImage
-            src={siteInfo?.icon}
-            className='rounded-full'
+            src={avatar}
+            className='rounded-full object-cover'
             width={useBlurAvatar ? 100 : 28}
             height={useBlurAvatar ? 100 : 28}
             alt={siteConfig('AUTHOR')}
