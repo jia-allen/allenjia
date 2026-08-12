@@ -1,5 +1,15 @@
 const CONFIG = {
   HEO_HOME_POST_TWO_COLS: true, // 首页博客两列显示，若为false则只显示一列
+  // 首页参考图已存放在 public/images/heo/reference，关闭后恢复使用 Notion 文章封面
+  HEO_USE_REFERENCE_IMAGES: true,
+  HEO_REFERENCE_POST_IMAGES: [
+    '/images/heo/reference/post-cover-01.webp',
+    '/images/heo/reference/post-cover-02.webp',
+    '/images/heo/reference/post-cover-03.webp',
+    '/images/heo/reference/post-cover-04.png',
+    '/images/heo/reference/post-cover-05.jpg',
+    '/images/heo/reference/post-cover-06.gif'
+  ],
   HEO_LOADING_COVER: true, // 页面加载的遮罩动画
 
   HEO_HOME_BANNER_ENABLE: true,
@@ -24,8 +34,8 @@ const CONFIG = {
 
   // 首页顶部通知条滚动内容，如不需要可以留空 []
   HEO_NOTICE_BAR: [
-    { title: '欢迎来到我的博客', url: 'https://blog.tangly1024.com' },
-    { title: '访问文档中心获取更多帮助', url: 'https://docs.tangly1024.com' }
+    { title: '👋Hi，欢迎来到宝的博客✨', url: 'https://allenjia.vercel.app/' },
+    { title: 'Ctrl＋D收藏本站不迷路', url: 'https://allenjia.vercel.app/' }
   ],
 
   // 英雄区左右侧组件颠倒位置
@@ -37,9 +47,10 @@ const CONFIG = {
   HEO_HERO_TITLE_1: '分享编程',
   HEO_HERO_TITLE_2: '与思维认知',
   HEO_HERO_TITLE_3: 'TANGLY1024.COM',
-  HEO_HERO_TITLE_4: '新版上线',
-  HEO_HERO_TITLE_5: 'NotionNext4.0 轻松定制主题',
-  HEO_HERO_TITLE_LINK: 'https://tangly1024.com',
+  HEO_HERO_TITLE_4: '你好，我是 Allen',
+  HEO_HERO_TITLE_5: '生活明朗，万物可爱',
+  HEO_HERO_TITLE_LINK: '/',
+  HEO_HERO_COVER_IMAGE: '/images/heo/reference/hero-cover.webp',
   // 英雄区遮罩文字
   HEO_HERO_COVER_TITLE: '随便逛逛',
 
@@ -54,7 +65,7 @@ const CONFIG = {
   //   HERO_RECOMMEND_COVER: 'https://cdn.pixabay.com/photo/2015/10/30/20/13/sunrise-1014712_1280.jpg', // 英雄区右侧图片
 
   // 英雄区右侧推荐文章遮罩控制
-  HEO_HERO_RECOMMEND_COVER_ENABLE: false, // 是否显示推荐文章遮罩图片，true显示遮罩需点击查看，false直接显示推荐文章
+  HEO_HERO_RECOMMEND_COVER_ENABLE: true, // 是否显示推荐文章遮罩图片，true显示遮罩需点击查看，false直接显示推荐文章
 
   // 右侧个人资料卡牌欢迎语，点击可自动切换
   HEO_INFOCARD_GREETINGS: [

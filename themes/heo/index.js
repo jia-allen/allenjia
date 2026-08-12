@@ -24,6 +24,7 @@ import SmartLink from '@/components/SmartLink'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import BlogPostArchive from './components/BlogPostArchive'
+import ArchiveIntro from './components/ArchiveIntro'
 import BlogPostListPage from './components/BlogPostListPage'
 import BlogPostListScroll from './components/BlogPostListScroll'
 import CategoryBar from './components/CategoryBar'
@@ -229,6 +230,8 @@ const LayoutArchive = props => {
     <div className='p-5 rounded-xl border dark:border-gray-600 max-w-6xl w-full bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-card-dark)]'>
       {/* 文章分类条 */}
       <CategoryBar {...props} border={false} />
+
+      <ArchiveIntro />
 
       <div className='px-3'>
         {Object.keys(archivePosts).map(archiveTitle => (

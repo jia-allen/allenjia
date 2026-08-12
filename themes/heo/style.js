@@ -114,6 +114,222 @@ const Style = () => {
         background-color: #f7f9fe;
       }
 
+      /* 路由等待页：参考站点的分栏加载节奏，复用本站蓝色主色 */
+      #theme-heo #loading-cover {
+        position: fixed;
+        z-index: 9999;
+        inset: 0;
+        display: flex;
+        overflow: hidden;
+        background: #ffffff;
+      }
+
+      #theme-heo .loading-cover-pattern {
+        width: 30%;
+        min-width: 12rem;
+        background-color: #5066ec;
+        background-image:
+          linear-gradient(30deg, transparent 42%, rgba(12, 29, 88, 0.7) 43%, rgba(12, 29, 88, 0.7) 45%, transparent 46%),
+          linear-gradient(150deg, transparent 42%, rgba(12, 29, 88, 0.7) 43%, rgba(12, 29, 88, 0.7) 45%, transparent 46%);
+        background-position: 0 0, 0 0;
+        background-size: 7rem 7rem;
+      }
+
+      #theme-heo .loading-cover-main {
+        position: relative;
+        display: flex;
+        width: 70%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        padding: 2rem;
+      }
+
+      #theme-heo .loading-cover-progress {
+        position: absolute;
+        top: 1.5rem;
+        width: 7rem;
+        height: 0.55rem;
+        overflow: hidden;
+        border: 1px solid #d6def7;
+        border-radius: 999px;
+        background: #f7f9fe;
+      }
+
+      #theme-heo .loading-cover-progress span {
+        display: block;
+        width: 45%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #4f65f0, #36c59d);
+        animation: heo-loading-progress 1.7s ease-in-out infinite;
+      }
+
+      #theme-heo .loading-cover-mark {
+        display: grid;
+        width: 7.25rem;
+        height: 7.25rem;
+        place-items: center;
+        border: 3px solid #5066ec;
+        border-radius: 1.25rem;
+        background: #ffffff;
+        box-shadow: 0 14px 35px rgba(79, 101, 240, 0.15);
+      }
+
+      #theme-heo .loading-cover-mark img {
+        width: 3.4rem;
+        height: 3.4rem;
+        border-radius: 0.75rem;
+      }
+
+      #theme-heo .loading-cover-title {
+        margin: 1.2rem 0 0;
+        color: #26324a;
+        font-size: 1.65rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+      }
+
+      #theme-heo .loading-cover-caption {
+        margin: 0;
+        color: #94a3b8;
+        font-size: 0.8rem;
+      }
+
+      html.dark #theme-heo #loading-cover {
+        background: #18171d;
+      }
+
+      html.dark #theme-heo .loading-cover-main,
+      html.dark #theme-heo .loading-cover-mark {
+        background: #1e1e1e;
+      }
+
+      html.dark #theme-heo .loading-cover-title {
+        color: #f8fafc;
+      }
+
+      html.dark #theme-heo .loading-cover-caption {
+        color: #94a3b8;
+      }
+
+      @keyframes heo-loading-progress {
+        0% {
+          transform: translateX(-110%);
+        }
+        55%,
+        100% {
+          transform: translateX(245%);
+        }
+      }
+
+      @media (max-width: 640px) {
+        #theme-heo .loading-cover-pattern {
+          width: 16%;
+          min-width: 3.25rem;
+          background-size: 4.5rem 4.5rem;
+        }
+
+        #theme-heo .loading-cover-main {
+          width: 84%;
+          padding: 1rem;
+        }
+      }
+
+      /* 合集页序言：强调内容主题，不使用广告式按钮或描边 */
+      #theme-heo #archive-intro {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(15rem, 0.85fr);
+        gap: 2rem;
+        align-items: end;
+        margin: 1.25rem 0 2.25rem;
+        padding: 1.25rem 0.75rem 0;
+      }
+
+      #theme-heo .archive-intro-heading {
+        min-width: 0;
+      }
+
+      #theme-heo .archive-intro-kicker {
+        margin: 0 0 0.7rem;
+        color: #3a86ff;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        line-height: 1;
+      }
+
+      #theme-heo #archive-intro h1 {
+        margin: 0;
+        color: #172033;
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        font-weight: 800;
+        letter-spacing: 0;
+        line-height: 1.08;
+      }
+
+      #theme-heo .archive-intro-quote {
+        margin: 0.9rem 0 0;
+        color: #64748b;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 1rem;
+        line-height: 1.7;
+      }
+
+      #theme-heo .archive-intro-notes {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+        padding-left: 1.15rem;
+      }
+
+      #theme-heo .archive-intro-notes::before {
+        position: absolute;
+        top: 0.2rem;
+        bottom: 0.2rem;
+        left: 0;
+        width: 2px;
+        border-radius: 999px;
+        background: #9cc4ff;
+        content: '';
+      }
+
+      #theme-heo .archive-intro-notes p {
+        margin: 0;
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+
+      html.dark #theme-heo #archive-intro h1 {
+        color: #f8fafc;
+      }
+
+      html.dark #theme-heo .archive-intro-quote,
+      html.dark #theme-heo .archive-intro-notes p {
+        color: #cbd5e1;
+      }
+
+      html.dark #theme-heo .archive-intro-notes::before {
+        background: #ca8a04;
+      }
+
+      @media (max-width: 640px) {
+        #theme-heo #archive-intro {
+          grid-template-columns: 1fr;
+          gap: 1.25rem;
+          margin-top: 1rem;
+          margin-bottom: 1.75rem;
+          padding-top: 0.75rem;
+        }
+
+        #theme-heo .archive-intro-notes {
+          padding-left: 0.95rem;
+        }
+      }
+
       /* 首页文章卡：封面、分类、标题、摘要和标签组成完整信息卡 */
       #theme-heo .heo-post-card {
         position: relative;
