@@ -256,6 +256,11 @@ const LayoutArchive = props => {
 const LayoutSlug = props => {
   const { post, lock, validPassword } = props
   const { locale, fullWidth } = useGlobal()
+  const router = useRouter()
+  const isAboutPage =
+    post?.slug === 'about' ||
+    post?.href === '/about' ||
+    router.asPath.split('?')[0] === '/about'
 
   const [hasCode, setHasCode] = useState(false)
 
@@ -274,7 +279,6 @@ const LayoutSlug = props => {
     siteConfig('COMMENT_GITALK_CLIENT_ID') ||
     siteConfig('COMMENT_WEBMENTION_ENABLE')
 
-  const router = useRouter()
   const waiting404 = siteConfig('POST_WAITING_TIME_FOR_404') * 1000
   useEffect(() => {
     // 404
@@ -300,7 +304,7 @@ const LayoutSlug = props => {
   return (
     <>
       <div
-        className={`article h-full w-full ${fullWidth ? '' : 'xl:max-w-5xl'} ${hasCode ? 'xl:w-[73.15vw]' : ''}  bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-bg-dark)] dark:border-gray-600 lg:hover:shadow lg:border rounded-2xl lg:px-2 lg:py-4 `}>
+        className={`article ${isAboutPage ? 'heo-about-page' : ''} h-full w-full ${fullWidth ? '' : 'xl:max-w-5xl'} ${hasCode ? 'xl:w-[73.15vw]' : ''}  bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-bg-dark)] dark:border-gray-600 lg:hover:shadow lg:border rounded-2xl lg:px-2 lg:py-4 `}>
         {/* 文章锁 */}
         {lock && <PostLock validPassword={validPassword} />}
 
@@ -320,10 +324,12 @@ const LayoutSlug = props => {
               </section>
 
               {/* 上一篇\下一篇文章 */}
-              <PostAdjacent {...props} />
-
-              {/* 分享 */}
-              <ShareBar post={post} />
+              {!isAboutPage && (
+                <>
+                  <PostAdjacent {...props} />
+                  <ShareBar post={post} />
+                </>
+              )}
               {post?.type === 'Post' && (
                 <div className='px-5'>
                   {/* 版权 */}
@@ -335,7 +341,7 @@ const LayoutSlug = props => {
             </article>
 
             {/* 评论区 */}
-            {fullWidth ? null : (
+            {fullWidth || isAboutPage ? null : (
               <div className={`${commentEnable && post ? '' : 'hidden'}`}>
                 <hr className='my-4 border-dashed' />
                 {/* 评论区上方广告 */}

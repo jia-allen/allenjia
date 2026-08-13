@@ -943,6 +943,173 @@ const Style = () => {
         color: #93c5fd;
       }
 
+      /* 关于页：以个人主页的阅读节奏区别于普通文章页 */
+      #theme-heo .heo-about-page {
+        max-width: 100%;
+        border: 0;
+        border-radius: 0;
+        background: transparent !important;
+        box-shadow: none;
+      }
+
+      #theme-heo .heo-about-page > .mx-auto {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      #theme-heo .heo-about-page #article-wrapper {
+        max-width: 74rem;
+        margin: 0 auto;
+      }
+
+      #theme-heo .heo-about-page #article-wrapper > section {
+        padding: clamp(1.25rem, 4vw, 3.75rem) clamp(1rem, 4vw, 3.25rem) 4rem;
+      }
+
+      #theme-heo .heo-about-page #article-wrapper > section > #notion-article {
+        width: 100%;
+      }
+
+      #theme-heo .heo-about-page #notion-article.notion-page {
+        max-width: 68rem;
+        margin: 0 auto;
+        color: #475569;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-h1 {
+        position: relative;
+        margin: 0 0 1.75rem;
+        padding: 0 0 1.25rem;
+        color: #172033;
+        font-size: clamp(2.1rem, 4vw, 3.8rem);
+        font-weight: 800;
+        letter-spacing: 0;
+        line-height: 1.08;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-h1::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 4.5rem;
+        height: 0.28rem;
+        border-radius: 999px;
+        background: #4f65f0;
+        content: '';
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-h1 + .notion-text {
+        color: #172033;
+        font-size: clamp(1.15rem, 2vw, 1.45rem);
+        font-weight: 650;
+        line-height: 1.7;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-h1 ~ .notion-text {
+        max-width: 62rem;
+        line-height: 1.95;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-h2 {
+        margin: 3rem 0 1rem;
+        padding: 0.15rem 0 0.15rem 0.85rem;
+        border-left: 0.28rem solid #4f65f0;
+        color: #172033;
+        font-size: clamp(1.35rem, 2vw, 1.8rem);
+        font-weight: 780;
+        line-height: 1.3;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-h3 {
+        margin: 1.65rem 0 0.45rem;
+        color: #334155;
+        font-size: 1.05rem;
+        font-weight: 750;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-text {
+        max-width: 62rem;
+        margin: 0.7rem 0;
+        color: #475569;
+        line-height: 1.95;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-quote {
+        max-width: 62rem;
+        margin: 1.35rem 0;
+        padding: 1rem 1.25rem;
+        border: 0;
+        border-left: 0.3rem solid #4f65f0;
+        border-radius: 0 0.65rem 0.65rem 0;
+        background: rgba(79, 101, 240, 0.08);
+        color: #334155;
+        font-size: 1.04rem;
+        line-height: 1.85;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-list {
+        max-width: 62rem;
+        margin: 0.32rem 0;
+        padding: 0.3rem 0.75rem 0.3rem 1.8rem;
+        border-radius: 0.45rem;
+        color: #475569;
+        line-height: 1.8;
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-list:hover {
+        background: rgba(79, 101, 240, 0.055);
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-hr {
+        max-width: 62rem;
+        margin: 2.5rem 0;
+        border-color: rgba(148, 163, 184, 0.28);
+      }
+
+      #theme-heo .heo-about-page #notion-article .notion-link {
+        font-weight: 650;
+      }
+
+      html.dark #theme-heo .heo-about-page #notion-article.notion-page,
+      html.dark #theme-heo .heo-about-page #notion-article .notion-text,
+      html.dark #theme-heo .heo-about-page #notion-article .notion-list {
+        color: #cbd5e1;
+      }
+
+      html.dark #theme-heo .heo-about-page #notion-article .notion-h1,
+      html.dark #theme-heo .heo-about-page #notion-article .notion-h2 {
+        color: #f8fafc;
+      }
+
+      html.dark #theme-heo .heo-about-page #notion-article .notion-h3 {
+        color: #e2e8f0;
+      }
+
+      html.dark #theme-heo .heo-about-page #notion-article .notion-quote {
+        background: rgba(96, 165, 250, 0.12);
+        color: #dbeafe;
+      }
+
+      @media (max-width: 767px) {
+        #theme-heo .heo-about-page #article-wrapper > section {
+          padding: 1.25rem 1rem 2.75rem;
+        }
+
+        #theme-heo .heo-about-page #notion-article .notion-h1 {
+          margin-bottom: 1.35rem;
+          font-size: 2.25rem;
+        }
+
+        #theme-heo .heo-about-page #notion-article .notion-h2 {
+          margin-top: 2.35rem;
+        }
+
+        #theme-heo .heo-about-page #notion-article .notion-text,
+        #theme-heo .heo-about-page #notion-article .notion-list {
+          line-height: 1.85;
+        }
+      }
+
       @media (max-width: 767px) {
         #theme-heo #home-manifesto {
           grid-template-columns: 1fr;
