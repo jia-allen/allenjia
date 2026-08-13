@@ -1,4 +1,5 @@
 import Comment from '@/components/Comment'
+import Live2D from '@/components/Live2D'
 import replaceSearchResult from '@/components/Mark'
 import NotionPage from '@/components/NotionPage'
 import ShareBar from '@/components/ShareBar'
@@ -169,7 +170,9 @@ const LayoutBase = props => {
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
         {/* 页脚 */}
-        <Footer title={siteConfig('TITLE')} />
+        <Footer />
+
+        <Live2D />
       </div>
     </ThemeGlobalHexo.Provider>
   )

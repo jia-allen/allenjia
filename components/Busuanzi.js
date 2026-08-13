@@ -1,26 +1,39 @@
+import BLOG from '@/blog.config'
 import busuanzi from '@/lib/plugins/busuanzi'
 import { useRouter } from 'next/router'
 import { useGlobal } from '@/lib/global'
-// import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-let path = ''
+export function isOfficialBusuanziHost(hostname, siteLink = BLOG.LINK) {
+  try {
+    return hostname === new URL(siteLink).hostname
+  } catch (error) {
+    return false
+  }
+}
 
-export default function Busuanzi () {
+export default function Busuanzi() {
   const { theme } = useGlobal()
   const router = useRouter()
-  router.events.on('routeChangeComplete', (url, option) => {
-    if (url !== path) {
-      path = url
-      busuanzi.fetch()
-    }
-  })
 
-  // 更换主题时更新
   useEffect(() => {
-    if (theme) {
-      busuanzi.fetch()
+    if (!theme) return
+
+    const refresh = () => {
+      if (isOfficialBusuanziHost(window.location.hostname)) {
+        busuanzi.fetch()
+      } else {
+        busuanzi.showPlaceholder()
+      }
     }
-  }, [theme])
+
+    refresh()
+    router.events.on('routeChangeComplete', refresh)
+
+    return () => {
+      router.events.off('routeChangeComplete', refresh)
+    }
+  }, [router.events, theme])
+
   return null
 }

@@ -22,7 +22,7 @@ const BLOG = {
   DESCRIPTION:
     process.env.NEXT_PUBLIC_DESCRIPTION ||
     '记录技术成长、工程实践与长期思考',
-  LINK: process.env.NEXT_PUBLIC_LINK || 'https://tangly1024.com', // 网站地址
+  LINK: 'https://allenjia.top', // 网站正式地址；SEO 身份不允许被模板环境变量覆盖
   KEYWORDS: process.env.NEXT_PUBLIC_KEYWORD || 'Notion, 博客', // 网站关键词 英文逗号隔开
   BLOG_FAVICON:
     process.env.NEXT_PUBLIC_FAVICON || '/wechat-avatar-favicon.png', // blog favicon 配置

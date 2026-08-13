@@ -4,7 +4,8 @@
 
 import {
   getCustomMenu,
-  getSourcePageSlugs
+  getSourcePageSlugs,
+  normalizeOwnerLink
 } from '@/lib/db/notion/getCustomMenu'
 
 describe('getCustomMenu', () => {
@@ -89,6 +90,29 @@ describe('getCustomMenu', () => {
       '/archive',
       'https://example.com'
     ])
+  })
+
+  it('replaces the template repository menu with the site owner GitHub', () => {
+    const collectionData = [
+      {
+        id: 'menu-github',
+        type: 'Menu',
+        status: 'Published',
+        title: 'GitHub',
+        slug: 'https://github.com/tangly1024/NotionNext',
+        href: 'https://github.com/tangly1024/NotionNext/'
+      }
+    ]
+
+    const menus = getCustomMenu({
+      collectionData,
+      sourcePageSlugs: new Map()
+    })
+
+    expect(menus[0].href).toBe('https://github.com/jia-allen')
+    expect(
+      normalizeOwnerLink('https://github.com/tangly1024/NotionNext')
+    ).toBe('https://github.com/jia-allen')
   })
 
   it('does not guess when multiple pages shared the same source slug', () => {

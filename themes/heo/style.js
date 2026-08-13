@@ -821,6 +821,57 @@ const Style = () => {
         flex-shrink: 0;
       }
 
+      /* 滚动后的导航只保留磨砂胶囊，页面内容可从胶囊之间透出 */
+      #theme-heo #nav.heo-nav-floating {
+        background: transparent;
+        box-shadow: none;
+      }
+
+      #theme-heo #nav.heo-nav-floating #nav-brand,
+      #theme-heo #nav.heo-nav-floating #nav-actions {
+        transition:
+          background-color 260ms ease,
+          box-shadow 260ms ease,
+          border-color 260ms ease;
+        border: 1px solid rgba(255, 255, 255, 0.62);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 5px 18px rgba(31, 41, 55, 0.08);
+        -webkit-backdrop-filter: saturate(165%) blur(16px);
+        backdrop-filter: saturate(165%) blur(16px);
+      }
+
+      #theme-heo #nav.heo-nav-floating #nav-brand {
+        flex: 0 1 auto;
+        max-width: min(52vw, 22rem);
+        display: flex;
+        min-height: 2.75rem;
+        align-items: center;
+        padding: 0 1rem;
+        border-radius: 999px;
+      }
+
+      #theme-heo #nav.heo-nav-floating #nav-actions {
+        min-height: 2.75rem;
+      }
+
+      html.dark #theme-heo #nav.heo-nav-floating #nav-brand,
+      html.dark #theme-heo #nav.heo-nav-floating #nav-actions {
+        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(30, 30, 30, 0.78);
+        box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+      }
+
+      @media (max-width: 767px) {
+        #theme-heo #nav.heo-nav-floating #nav-brand {
+          min-height: 2.5rem;
+          padding: 0 0.9rem;
+        }
+
+        #theme-heo #nav.heo-nav-floating #nav-actions {
+          min-height: 2.5rem;
+        }
+      }
+
       html.dark #theme-heo #archive-intro h1 {
         color: #f8fafc;
       }

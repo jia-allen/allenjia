@@ -1,43 +1,73 @@
 import { BeiAnGongAn } from '@/components/BeiAnGongAn'
-import BeiAnSite from '@/components/BeiAnSite'
-import PoweredBy from '@/components/PoweredBy'
+import SmartLink from '@/components/SmartLink'
 import { siteConfig } from '@/lib/config'
+import HEO_CONFIG from '@/themes/heo/config'
 
-const Footer = ({ title }) => {
-  const d = new Date()
-  const currentYear = d.getFullYear()
-  const since = siteConfig('SINCE')
+const Footer = () => {
+  const isLocalPreview = process.env.NODE_ENV === 'development'
+  const currentYear = new Date().getFullYear()
+  const since = siteConfig('HEO_FOOTER_SINCE', siteConfig('SINCE'), HEO_CONFIG)
   const copyrightDate =
-    parseInt(since) < currentYear ? since + '-' + currentYear : currentYear
+    Number(since) < currentYear ? `${since}-${currentYear}` : currentYear
+  const BEI_AN = siteConfig('BEI_AN')
+  const BEI_AN_LINK = siteConfig('BEI_AN_LINK')
+  const visitOffset = siteConfig('HEO_SITE_VISIT_OFFSET', 0, HEO_CONFIG)
+  const visitorOffset = siteConfig('HEO_SITE_VISITOR_OFFSET', 0, HEO_CONFIG)
 
   return (
-    <footer className='relative z-10 dark:bg-black flex-shrink-0 bg-hexo-light-gray justify-center text-center m-auto w-full leading-6  text-gray-600 dark:text-gray-100 text-sm p-6'>
-      {/* <DarkModeButton/> */}
-      <i className='fas fa-copyright' /> {`${copyrightDate}`}
-      <span>
-        <i className='mx-1 animate-pulse fas fa-heart' />
-        <a
-          href={siteConfig('LINK')}
-          className='underline font-bold  dark:text-gray-300 '>
-          {siteConfig('AUTHOR')}
-        </a>
-        .<br />
-        <BeiAnSite />
-        <BeiAnGongAn />
-        <span className='hidden busuanzi_container_site_pv'>
-          <i className='fas fa-eye' />
-          <span className='px-1 busuanzi_value_site_pv'> </span>
+    <footer className='relative z-10 flex-shrink-0 bg-hexo-light-gray px-6 py-8 text-sm text-gray-600 dark:bg-black dark:text-gray-100'>
+      <div className='mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-5 gap-y-2'>
+        <span className='inline-flex items-center gap-1.5 whitespace-nowrap'>
+          <i className='far fa-copyright' aria-hidden='true' />
+          <span>{copyrightDate}</span>
+          <SmartLink href='/about' className='font-semibold underline'>
+            {siteConfig('TITLE')}
+          </SmartLink>
         </span>
-        <span className='pl-2 hidden busuanzi_container_site_uv'>
-          <i className='fas fa-users' />
-          <span className='px-1 busuanzi_value_site_uv'> </span>
-        </span>
-        <h1 className='text-xs pt-4 text-light-400 dark:text-gray-400'>
-          {title} {siteConfig('BIO') && <>|</>} {siteConfig('BIO')}
-        </h1>
-        <PoweredBy className='justify-center' />
-      </span>
-      <br />
+
+        {BEI_AN && (
+          <span className='inline-flex items-center gap-1.5 whitespace-nowrap'>
+            <i className='fas fa-shield-alt' aria-hidden='true' />
+            <a href={BEI_AN_LINK} target='_blank' rel='noreferrer nofollow'>
+              {BEI_AN}
+            </a>
+          </span>
+        )}
+
+        <BeiAnGongAn className='inline-flex items-center whitespace-nowrap' />
+
+        {isLocalPreview ? (
+          <>
+            <span title='全站访问量'>
+              <i className='fas fa-eye mr-1.5' aria-hidden='true' />--
+            </span>
+            <span title='访客数'>
+              <i className='fas fa-users mr-1.5' aria-hidden='true' />--
+            </span>
+          </>
+        ) : (
+          <>
+            <span
+              className='hidden busuanzi_container_site_pv'
+              title='全站访问量'>
+              <i className='fas fa-eye mr-1.5' aria-hidden='true' />
+              <span
+                className='busuanzi_value_site_pv'
+                data-busuanzi-offset={visitOffset}
+              />
+            </span>
+            <span
+              className='hidden busuanzi_container_site_uv'
+              title='访客数'>
+              <i className='fas fa-users mr-1.5' aria-hidden='true' />
+              <span
+                className='busuanzi_value_site_uv'
+                data-busuanzi-offset={visitorOffset}
+              />
+            </span>
+          </>
+        )}
+      </div>
     </footer>
   )
 }

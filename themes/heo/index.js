@@ -16,6 +16,7 @@ import NotionPage from '@/components/NotionPage'
 import ShareBar from '@/components/ShareBar'
 import WWAds from '@/components/WWAds'
 import { siteConfig } from '@/lib/config'
+import Live2D from '@/components/Live2D'
 import { useGlobal } from '@/lib/global'
 import { loadWowJS } from '@/lib/plugins/wow'
 import { isBrowser } from '@/lib/utils'
@@ -129,6 +130,8 @@ const LayoutBase = props => {
 
       {/* 页脚 */}
       <Footer />
+
+      <Live2D />
 
       {HEO_LOADING_COVER && <LoadingCover />}
     </div>

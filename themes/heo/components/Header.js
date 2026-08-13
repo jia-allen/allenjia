@@ -1,5 +1,4 @@
 import { siteConfig } from '@/lib/config'
-import { isBrowser } from '@/lib/utils'
 import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useRef, useState } from 'react'
@@ -22,7 +21,6 @@ const Header = props => {
   const [fixedNav, setFixedNav] = useState(false)
   const [textWhite, setTextWhite] = useState(false)
   const [navBgWhite, setBgWhite] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(0)
   // 是否存在文章页背景图（仅客户端检测）
   const [hasPostBg, setHasPostBg] = useState(false)
 
@@ -80,38 +78,6 @@ const Header = props => {
     }
   }, [scrollTrigger])
 
-  // 导航栏根据滚动轮播菜单内容
-  useEffect(() => {
-    let prevScrollY = 0
-    let ticking = false
-
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const currentScrollY = window.scrollY
-          if (currentScrollY > prevScrollY) {
-            setActiveIndex(1) // 向下滚动时设置activeIndex为1
-          } else {
-            setActiveIndex(0) // 向上滚动时设置activeIndex为0
-          }
-          prevScrollY = currentScrollY
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    if (isBrowser) {
-      window.addEventListener('scroll', handleScroll, { passive: true })
-    }
-
-    return () => {
-      if (isBrowser) {
-        window.removeEventListener('scroll', handleScroll)
-      }
-    }
-  }, [])
-
   return (
     <>
       <style jsx>{`
@@ -157,27 +123,18 @@ const Header = props => {
         className={`z-20 h-[60px] md:h-16 top-0 w-full duration-300 transition-all
             ${fixedNav ? 'fixed' : 'relative bg-transparent'} 
             ${textWhite ? 'text-white ' : 'text-black dark:text-white'}  
-            ${navBgWhite ? 'bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-bg-dark)] shadow' : 'bg-transparent'}`}>
+            ${navBgWhite ? 'heo-nav-floating' : 'bg-transparent'}`}>
         <div className='flex min-w-0 h-full mx-auto justify-between items-center gap-2 max-w-[86rem] px-3 md:px-6'>
           {/* 左侧logo */}
-          <div className='min-w-0 flex-1 lg:flex-none'>
+          <div id='nav-brand' className='min-w-0 flex-1 lg:flex-none'>
             <Logo {...props} />
           </div>
 
-          {/* 中间菜单 */}
+          {/* 页面顶部显示数据库菜单；滚动吸顶后隐藏中间区域 */}
           <div
-            id='nav-bar-swipe'
-            className={`hidden lg:flex flex-grow flex-col items-center justify-center h-full relative w-full`}>
-            <div
-              className={`absolute transition-all duration-700 ${activeIndex === 0 ? 'opacity-100 mt-0' : '-mt-20 opacity-0 invisible'}`}>
-              <MenuListTop {...props} />
-            </div>
-            <div
-              className={`absolute transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0' : '-mb-20 opacity-0 invisible'}`}>
-              <h1 className='font-bold text-center text-light-400 dark:text-gray-400'>
-                {siteConfig('TITLE')}
-              </h1>
-            </div>
+            id='nav-bar-top'
+            className={`hidden lg:flex min-w-0 flex-grow items-center justify-center transition-opacity duration-200 ${navBgWhite ? 'invisible opacity-0 pointer-events-none' : 'visible opacity-100'}`}>
+            <MenuListTop {...props} />
           </div>
 
           {/* 右侧固定 */}
