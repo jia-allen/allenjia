@@ -3,7 +3,6 @@ import { isBrowser } from '@/lib/utils'
 import throttle from 'lodash.throttle'
 import { useRouter } from 'next/router'
 import { useEffect, useMemo, useRef, useState } from 'react'
-import CONFIG from '../config'
 import DarkModeButton from './DarkModeButton'
 import Logo from './Logo'
 import { MenuListTop } from './MenuListTop'
@@ -149,19 +148,21 @@ const Header = props => {
 
       {/* fixed时留白高度 */}
       {fixedNav && !hasPostBg && (
-        <div className='h-16'></div>
+        <div className='h-[60px] md:h-16'></div>
       )}
 
       {/* 顶部导航菜单栏 */}
       <nav
         id='nav'
-        className={`z-20 h-16 top-0 w-full duration-300 transition-all
+        className={`z-20 h-[60px] md:h-16 top-0 w-full duration-300 transition-all
             ${fixedNav ? 'fixed' : 'relative bg-transparent'} 
             ${textWhite ? 'text-white ' : 'text-black dark:text-white'}  
             ${navBgWhite ? 'bg-[var(--heo-color-card)] dark:bg-[var(--heo-color-bg-dark)] shadow' : 'bg-transparent'}`}>
-        <div className='flex h-full mx-auto justify-between items-center max-w-[86rem] px-6'>
+        <div className='flex min-w-0 h-full mx-auto justify-between items-center gap-2 max-w-[86rem] px-3 md:px-6'>
           {/* 左侧logo */}
-          <Logo {...props} />
+          <div className='min-w-0 flex-1 lg:flex-none'>
+            <Logo {...props} />
+          </div>
 
           {/* 中间菜单 */}
           <div
@@ -174,11 +175,7 @@ const Header = props => {
             <div
               className={`absolute transition-all duration-700 ${activeIndex === 1 ? 'opacity-100 mb-0' : '-mb-20 opacity-0 invisible'}`}>
               <h1 className='font-bold text-center text-light-400 dark:text-gray-400'>
-                {siteConfig(
-                  'HEO_NAV_SCROLL_TITLE',
-                  `${siteConfig('AUTHOR') || siteConfig('TITLE')} | ${siteConfig('BIO')}`,
-                  CONFIG
-                )}
+                {siteConfig('TITLE')}
               </h1>
             </div>
           </div>

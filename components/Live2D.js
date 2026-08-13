@@ -2,6 +2,7 @@
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
 import { isMobile, loadExternalResource } from '@/lib/utils'
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 /**
@@ -9,7 +10,8 @@ import { useEffect } from 'react'
  * @returns
  */
 export default function Live2D() {
-  const { theme, switchTheme } = useGlobal()
+  const { theme } = useGlobal()
+  const router = useRouter()
   const showPet = JSON.parse(siteConfig('WIDGET_PET'))
   const petLink = siteConfig('WIDGET_PET_LINK')
   const petSwitchTheme = siteConfig('WIDGET_PET_SWITCH_THEME')
@@ -32,11 +34,16 @@ export default function Live2D() {
         }
       })
     }
-  }, [theme])
+  }, [petLink, showPet, theme])
 
   function handleClick() {
     if (petSwitchTheme) {
-      switchTheme()
+      const currentTheme = router.query.theme || theme
+      const nextTheme = currentTheme === 'hexo' ? 'heo' : 'hexo'
+      router.push({
+        pathname: router.pathname,
+        query: { ...router.query, theme: nextTheme }
+      })
     }
   }
 

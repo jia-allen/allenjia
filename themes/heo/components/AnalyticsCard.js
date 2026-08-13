@@ -7,6 +7,7 @@ import { siteConfig } from '@/lib/config'
  * @returns
  */
 export function AnalyticsCard(props) {
+  const isLocalPreview = process.env.NODE_ENV === 'development'
   const targetDate = new Date(siteConfig('HEO_SITE_CREATE_TIME', null, CONFIG))
   const today = new Date()
   const diffTime = today.getTime() - targetDate.getTime() // 获取两个日期之间的毫秒数差值
@@ -15,6 +16,8 @@ export function AnalyticsCard(props) {
   const siteTimeTitle = siteConfig('HEO_SITE_TIME_TITLE', null, CONFIG)
   const siteVisitTitle = siteConfig('HEO_SITE_VISIT_TITLE', null, CONFIG)
   const siteVisitorTitle = siteConfig('HEO_SITE_VISITOR_TITLE', null, CONFIG)
+  const siteVisitOffset = siteConfig('HEO_SITE_VISIT_OFFSET', 0, CONFIG)
+  const siteVisitorOffset = siteConfig('HEO_SITE_VISITOR_OFFSET', 0, CONFIG)
 
   const { postCount } = props
   return <>
@@ -31,16 +34,26 @@ export function AnalyticsCard(props) {
                     <div>{diffDays} 天</div>
                 </div>
             </div>
-            <div className='hidden busuanzi_container_page_pv'>
+            <div className={isLocalPreview ? '' : 'hidden busuanzi_container_site_pv'}>
                 <div className='flex justify-between'>
                     <div>{siteVisitTitle}</div>
-                    <div className='busuanzi_value_page_pv' />
+                    {isLocalPreview
+                      ? <div>--</div>
+                      : <div
+                          className='busuanzi_value_site_pv'
+                          data-busuanzi-offset={siteVisitOffset}
+                        />}
                 </div>
             </div>
-            <div className='hidden busuanzi_container_site_uv'>
+            <div className={isLocalPreview ? '' : 'hidden busuanzi_container_site_uv'}>
                 <div className='flex justify-between'>
                     <div>{siteVisitorTitle}</div>
-                    <div className='busuanzi_value_site_uv' />
+                    {isLocalPreview
+                      ? <div>--</div>
+                      : <div
+                          className='busuanzi_value_site_uv'
+                          data-busuanzi-offset={siteVisitorOffset}
+                        />}
                 </div>
             </div>
         </div>

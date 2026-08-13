@@ -21,7 +21,6 @@ const CONFIG = {
   HEO_LOADING_COVER: true, // 页面加载的遮罩动画
 
   HEO_HOME_BANNER_ENABLE: true,
-  HEO_NAV_SCROLL_TITLE: 'Allen（爱伦）| 宝的个人博客',
   HEO_PROFILE_AVATAR: '/wechat-avatar-square.jpg',
 
   HEO_INFO_CARD_AVATAR_BLUR: true, // 文章详情页个人资料卡头像样式。true：显示为模糊装饰头像；false：与首页头像保持一致
@@ -40,7 +39,8 @@ const CONFIG = {
   HEO_COLOR_TEXT: '#111827',
   HEO_COLOR_TEXT_SECONDARY: '#4b5563',
 
-  HEO_SITE_CREATE_TIME: '2021-09-21', // 建站日期，用于计算网站运行的第几天
+  HEO_SITE_CREATE_TIME: '2023-12-26', // 建站日期，用于计算网站运行的第几天
+  HEO_FOOTER_SINCE: 2023,
 
   // 首页顶部通知条滚动内容，如不需要可以留空 []
   HEO_NOTICE_BAR: [
@@ -163,8 +163,10 @@ const CONFIG = {
   // 底部统计面板文案
   HEO_POST_COUNT_TITLE: '文章数:',
   HEO_SITE_TIME_TITLE: '建站天数:',
-  HEO_SITE_VISIT_TITLE: '访问量:',
+  HEO_SITE_VISIT_TITLE: '全站访问量:',
   HEO_SITE_VISITOR_TITLE: '访客数:',
+  HEO_SITE_VISIT_OFFSET: 300, // 展示用历史访问基数，设为 0 则显示真实统计
+  HEO_SITE_VISITOR_OFFSET: 50, // 展示用历史访客基数，设为 0 则显示真实统计
 
   // *****  以下配置无效，只是预留开发 ****
   // 菜单配置

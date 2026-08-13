@@ -32,13 +32,13 @@ export default function CategoryBar(props) {
   return (
     <div
       id='category-bar'
-      className={`wow fadeInUp flex flex-nowrap justify-between items-center h-12 mb-4 space-x-2 w-full lg:bg-[var(--heo-color-card)] dark:lg:bg-[var(--heo-color-card-dark)]
+      className={`wow fadeInUp flex flex-nowrap justify-between items-center h-12 mb-4 gap-2 w-full lg:bg-[var(--heo-color-card)] dark:lg:bg-[var(--heo-color-card-dark)]
             py-2 lg:px-2 rounded-xl transition-colors duration-200`}
     >
       <div
         id='category-bar-items'
         ref={categoryBarItemsRef}
-        className='scroll-smooth max-w-4xl rounded-lg scroll-hidden flex justify-start flex-nowrap items-center overflow-x-scroll'
+        className='scroll-smooth min-w-0 flex-1 max-w-4xl rounded-lg scroll-hidden flex justify-start flex-nowrap items-center overflow-x-auto'
       >
         <MenuItem href='/' name={locale.NAV.INDEX} />
         {categoryOptions?.map((c, index) => (
@@ -46,7 +46,10 @@ export default function CategoryBar(props) {
         ))}
       </div>
 
-      <div id='category-bar-next' className='flex items-center justify-center'>
+      <div
+        id='category-bar-next'
+        className='flex flex-shrink-0 items-center justify-center'
+      >
         <div
           id='right'
           className='cursor-pointer mx-2 dark:text-gray-300 dark:hover:text-[var(--heo-color-accent)] hover:text-[var(--heo-color-primary)]'

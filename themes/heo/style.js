@@ -31,10 +31,150 @@ const Style = () => {
         color: var(--heo-color-text);
       }
 
+      /* Allen 品牌鼠标：仅在桌面精细指针设备启用 */
+      @media (hover: hover) and (pointer: fine) {
+        #theme-heo {
+          cursor: url('/images/heo/cursor-default.svg') 3 3, default;
+        }
+
+        #theme-heo a,
+        #theme-heo button,
+        #theme-heo [role='button'],
+        #theme-heo [onclick],
+        #theme-heo summary,
+        #theme-heo label,
+        #theme-heo select,
+        #theme-heo img,
+        #theme-heo .cursor-pointer {
+          cursor: url('/images/heo/cursor-link.svg') 14 4, pointer !important;
+        }
+
+        #theme-heo input[type='text'],
+        #theme-heo input[type='search'],
+        #theme-heo input[type='email'],
+        #theme-heo input[type='password'],
+        #theme-heo input[type='url'],
+        #theme-heo input[type='number'],
+        #theme-heo textarea,
+        #theme-heo [contenteditable='true'] {
+          cursor: text !important;
+        }
+
+        #theme-heo button:disabled,
+        #theme-heo [aria-disabled='true'] {
+          cursor: not-allowed !important;
+        }
+
+        #theme-heo [draggable='true'] {
+          cursor: grab !important;
+        }
+
+        #theme-heo [draggable='true']:active {
+          cursor: grabbing !important;
+        }
+      }
+
       .dark #theme-heo {
         --heo-color-text: var(--heo-color-text-dark);
         --heo-color-text-secondary: var(--heo-color-text-secondary-dark);
         background-color: var(--heo-color-bg-dark);
+      }
+
+      #theme-heo .heo-footer {
+        margin-top: clamp(2.5rem, 6vw, 5rem);
+        color: #5f6673;
+        background: transparent;
+      }
+
+      #theme-heo #footer-bottom {
+        min-height: 7.25rem;
+        gap: 1.25rem 2rem;
+        padding: 1.5rem clamp(1.25rem, 3vw, 2.25rem);
+        border-top: 1px solid rgba(148, 163, 184, 0.22);
+        border-right: 0.28rem solid #4f65f0;
+        border-radius: 0 0 1.25rem 1.25rem;
+        background:
+          radial-gradient(circle at 72% 0, rgba(251, 113, 133, 0.06), transparent 32%),
+          linear-gradient(105deg, #f2f6fd 0%, #f4f2fb 54%, #f7f3f8 100%);
+        box-shadow: 0 12px 28px rgba(51, 65, 85, 0.06);
+      }
+
+      #theme-heo .heo-footer-group {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 0.9rem;
+        font-weight: 650;
+        line-height: 1.5;
+      }
+
+      #theme-heo .heo-footer-copyright,
+      #theme-heo .heo-footer-record,
+      #theme-heo .heo-footer-police-record,
+      #theme-heo .heo-footer-stat {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        white-space: nowrap;
+      }
+
+      #theme-heo .heo-footer-copyright a,
+      #theme-heo .heo-footer-record a,
+      #theme-heo .heo-footer-police-record a {
+        color: inherit;
+        text-decoration: underline;
+        text-decoration-color: rgba(95, 102, 115, 0.35);
+        text-underline-offset: 0.16rem;
+      }
+
+      #theme-heo .heo-footer-copyright a:hover,
+      #theme-heo .heo-footer-record a:hover,
+      #theme-heo .heo-footer-police-record a:hover {
+        color: #4f65f0;
+      }
+
+      #theme-heo .heo-footer-record,
+      #theme-heo .heo-footer-police-record {
+        color: #ec4899;
+      }
+
+      #theme-heo .heo-footer-stat:first-of-type {
+        color: #38bdf8;
+      }
+
+      #theme-heo .heo-footer-stat:last-child {
+        color: #22c55e;
+      }
+
+      html.dark #theme-heo #footer-bottom {
+        border-top-color: rgba(148, 163, 184, 0.18);
+        border-right-color: #ca8a04;
+        color: #cbd5e1;
+        background:
+          radial-gradient(circle at 72% 0, rgba(202, 138, 4, 0.08), transparent 32%),
+          linear-gradient(105deg, #1f2027 0%, #24232c 54%, #29242c 100%);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+      }
+
+      @media (max-width: 767px) {
+        #theme-heo .heo-footer {
+          margin-top: 2.5rem;
+        }
+
+        #theme-heo #footer-bottom {
+          min-height: 0;
+          align-items: flex-start;
+          padding: 1.25rem 1rem;
+          border-radius: 0 0 0.85rem 0.85rem;
+        }
+
+        #theme-heo .heo-footer-group {
+          width: 100%;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.65rem 0.85rem;
+          text-align: center;
+        }
       }
 
       html:not(.dark) #theme-heo .bg-white {
@@ -830,6 +970,37 @@ const Style = () => {
         stroke-width: 1.8;
       }
 
+      @media (max-width: 767px) {
+        #theme-heo .heo-post-card {
+          height: auto;
+          margin-bottom: 0;
+          border-radius: 1.25rem;
+        }
+
+        #theme-heo .heo-post-card-grid {
+          height: auto;
+          min-height: 0;
+        }
+
+        #theme-heo .heo-post-card-grid .heo-post-card-body {
+          min-height: 0;
+          gap: 0.55rem;
+          padding: 0.85rem 0.95rem 0.95rem;
+        }
+
+        #theme-heo .heo-post-card-summary {
+          height: auto;
+          min-height: 0;
+          line-height: 1.5;
+        }
+
+        #theme-heo .heo-post-card-tags {
+          min-height: 0;
+          margin-top: 0.15rem;
+          padding-bottom: 0.05rem;
+        }
+      }
+
       #theme-heo .heo-post-card-badge {
         position: absolute;
         top: -0.5rem;
@@ -1026,6 +1197,42 @@ const Style = () => {
 
       #theme-heo #category-bar {
         box-shadow: 0 5px 18px rgba(59, 130, 246, 0.05);
+      }
+
+      #theme-heo #category-bar-items {
+        min-width: 0;
+      }
+
+      #theme-heo #category-bar-next {
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 767px) {
+        #theme-heo #category-bar {
+          gap: 0.35rem;
+          margin-bottom: 0.75rem;
+          padding-left: 0.15rem;
+          padding-right: 0.15rem;
+        }
+
+        #theme-heo #category-bar-items {
+          padding-right: 0.15rem;
+        }
+
+        #theme-heo #category-bar-items > div {
+          margin-right: 0.25rem;
+          padding-left: 0.45rem;
+          padding-right: 0.45rem;
+        }
+
+        #theme-heo #category-bar-next #right {
+          margin-left: 0.2rem;
+          margin-right: 0.35rem;
+        }
+
+        #theme-heo #category-bar-next a {
+          font-size: 0.9rem;
+        }
       }
 
       #theme-heo #home-manifesto {
