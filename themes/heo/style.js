@@ -315,41 +315,68 @@ const Style = () => {
         }
       }
 
-      /* 路由等待页：参考站点的分栏加载节奏，复用本站蓝色主色 */
+      /* 路由等待页：双层面板依次向右退出 */
       #theme-heo #loading-cover {
         position: fixed;
         z-index: 9999;
         inset: 0;
-        display: flex;
         overflow: hidden;
-        background: #ffffff;
+        pointer-events: all;
+      }
+
+      #theme-heo .loading-cover-pattern,
+      #theme-heo .loading-cover-main {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        will-change: transform;
+        transition: transform 1.05s cubic-bezier(0.72, 0, 0.18, 1);
       }
 
       #theme-heo .loading-cover-pattern {
-        width: 30%;
-        min-width: 12rem;
+        display: grid;
+        place-items: center;
         background-color: #5066ec;
-        background-image:
-          linear-gradient(30deg, transparent 42%, rgba(12, 29, 88, 0.7) 43%, rgba(12, 29, 88, 0.7) 45%, transparent 46%),
-          linear-gradient(150deg, transparent 42%, rgba(12, 29, 88, 0.7) 43%, rgba(12, 29, 88, 0.7) 45%, transparent 46%);
-        background-position: 0 0, 0 0;
-        background-size: 7rem 7rem;
+        background-image: url('/images/heo/loading-pattern.svg');
+        background-repeat: repeat;
+        background-size: min(24vw, 18rem);
+      }
+
+      #theme-heo .loading-cover-pattern-word {
+        color: rgba(255, 255, 255, 0.12);
+        font-size: clamp(5rem, 18vw, 17rem);
+        font-weight: 900;
+        letter-spacing: 0.08em;
       }
 
       #theme-heo .loading-cover-main {
-        position: relative;
         display: flex;
-        width: 70%;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 0.45rem;
+        gap: 0.35rem;
         padding: 2rem;
+        background: #ffffff;
+        transition-delay: 0s;
+      }
+
+      #theme-heo #loading-cover.is-leaving {
+        pointer-events: none;
+      }
+
+      #theme-heo #loading-cover.is-leaving .loading-cover-main,
+      #theme-heo #loading-cover.is-leaving .loading-cover-pattern {
+        transform: translateX(105%);
+      }
+
+      #theme-heo #loading-cover.is-leaving .loading-cover-pattern {
+        transition-delay: 0.22s;
       }
 
       #theme-heo .loading-cover-progress {
         position: absolute;
-        top: 1.5rem;
+        top: max(1.25rem, env(safe-area-inset-top));
         width: 7rem;
         height: 0.55rem;
         overflow: hidden;
@@ -367,29 +394,119 @@ const Style = () => {
         animation: heo-loading-progress 1.7s ease-in-out infinite;
       }
 
-      #theme-heo .loading-cover-mark {
-        display: grid;
-        width: 7.25rem;
-        height: 7.25rem;
-        place-items: center;
-        border: 3px solid #5066ec;
-        border-radius: 1.25rem;
-        background: #ffffff;
-        box-shadow: 0 14px 35px rgba(79, 101, 240, 0.15);
+      #theme-heo .loading-cover-portrait {
+        position: relative;
+        width: clamp(12rem, 18vw, 16rem);
+        height: clamp(12rem, 18vw, 16rem);
       }
 
-      #theme-heo .loading-cover-mark img {
-        width: 3.4rem;
-        height: 3.4rem;
-        border-radius: 0.75rem;
+      #theme-heo .loading-cover-window {
+        position: absolute;
+        width: 68%;
+        height: 68%;
+        border: 3px solid #26324a;
+        border-radius: 0.65rem;
+        background: #ffffff;
+      }
+
+      #theme-heo .loading-cover-window-back {
+        top: 13%;
+        left: 13%;
+        opacity: 0.42;
+        transform: translate(-1rem, -1rem);
+      }
+
+      #theme-heo .loading-cover-window-front {
+        top: 17%;
+        left: 17%;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        box-shadow: 0.75rem 0.75rem 0 rgba(79, 101, 240, 0.14);
+        animation: heo-loading-window 2.4s ease-in-out infinite;
+      }
+
+      #theme-heo .loading-cover-window-front img {
+        width: 54%;
+        aspect-ratio: 1;
+        border: 3px solid #4f65f0;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      #theme-heo .loading-cover-window-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        width: 100%;
+        gap: 0.3rem;
+        padding: 0.45rem;
+        border-bottom: 2px solid #26324a;
+      }
+
+      #theme-heo .loading-cover-window-bar i {
+        width: 0.38rem;
+        height: 0.38rem;
+        border-radius: 50%;
+        background: #4f65f0;
+      }
+
+      #theme-heo .loading-cover-code {
+        position: absolute;
+        right: 0.6rem;
+        bottom: 0.35rem;
+        color: #4f65f0;
+        font-family: monospace;
+        font-size: 0.85rem;
+        font-weight: 800;
+      }
+
+      #theme-heo .loading-cover-orbit {
+        position: absolute;
+        border: 2px solid rgba(79, 101, 240, 0.32);
+        border-radius: 50%;
+      }
+
+      #theme-heo .loading-cover-orbit-one {
+        inset: 1%;
+        animation: heo-loading-orbit 6s linear infinite;
+      }
+
+      #theme-heo .loading-cover-orbit-two {
+        inset: 8%;
+        border-style: dashed;
+        animation: heo-loading-orbit 8s linear infinite reverse;
       }
 
       #theme-heo .loading-cover-title {
-        margin: 1.2rem 0 0;
+        position: relative;
+        margin: 0.85rem 0 0;
         color: #26324a;
-        font-size: 1.65rem;
-        font-weight: 800;
-        letter-spacing: 0.06em;
+        font-size: 1.45rem;
+        font-weight: 900;
+        letter-spacing: 0.24em;
+        animation: heo-loading-shift 0.9s ease-in-out infinite alternate;
+      }
+
+      #theme-heo .loading-cover-title::before,
+      #theme-heo .loading-cover-title::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: attr(data-text);
+        opacity: 0.6;
+        z-index: -1;
+      }
+
+      #theme-heo .loading-cover-title::before {
+        color: #ef4444;
+        transform: translate(-2px, 1px);
+      }
+
+      #theme-heo .loading-cover-title::after {
+        color: #22c55e;
+        transform: translate(2px, -1px);
       }
 
       #theme-heo .loading-cover-caption {
@@ -403,7 +520,7 @@ const Style = () => {
       }
 
       html.dark #theme-heo .loading-cover-main,
-      html.dark #theme-heo .loading-cover-mark {
+      html.dark #theme-heo .loading-cover-window {
         background: #1e1e1e;
       }
 
@@ -425,16 +542,56 @@ const Style = () => {
         }
       }
 
+      @keyframes heo-loading-window {
+        0%,
+        100% {
+          transform: translateY(-0.2rem) rotate(-1deg);
+        }
+        50% {
+          transform: translateY(0.35rem) rotate(1deg);
+        }
+      }
+
+      @keyframes heo-loading-orbit {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes heo-loading-shift {
+        from {
+          transform: translateX(-0.08rem);
+        }
+        to {
+          transform: translateX(0.08rem);
+        }
+      }
+
       @media (max-width: 640px) {
-        #theme-heo .loading-cover-pattern {
-          width: 16%;
-          min-width: 3.25rem;
-          background-size: 4.5rem 4.5rem;
+        #theme-heo .loading-cover-main {
+          padding: 1rem;
         }
 
-        #theme-heo .loading-cover-main {
-          width: 84%;
-          padding: 1rem;
+        #theme-heo .loading-cover-pattern {
+          background-size: 9rem;
+        }
+
+        #theme-heo .loading-cover-caption {
+          font-size: 0.75rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #theme-heo .loading-cover-main,
+        #theme-heo .loading-cover-pattern {
+          transition-duration: 0.2s;
+        }
+
+        #theme-heo .loading-cover-progress span,
+        #theme-heo .loading-cover-window-front,
+        #theme-heo .loading-cover-orbit,
+        #theme-heo .loading-cover-title {
+          animation: none;
         }
       }
 

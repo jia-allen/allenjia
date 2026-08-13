@@ -1,24 +1,38 @@
 import { useGlobal } from '@/lib/global'
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
+
 /**
- * 路由切换时的轻量等待页。
- * 采用 Heo 主题的蓝色几何纹理和顶部进度条，避免整屏黑色扩散动画。
+ * 路由切换时的品牌等待页。
+ * 路由完成后保留短暂的退出阶段，让两层面板依次滑出。
  */
 export default function LoadingCover() {
   const { onLoading } = useGlobal()
-  const [isVisible, setIsVisible] = useState(false) // 初始状态设置为false，避免服务端渲染与客户端渲染不一致
+  const [isVisible, setIsVisible] = useState(false)
+  const [isLeaving, setIsLeaving] = useState(false)
 
   useEffect(() => {
-    // 确保在客户端渲染时才设置可见性
     if (onLoading) {
+      setIsLeaving(false)
       setIsVisible(true)
-    } else {
-      setIsVisible(false)
+      return
     }
-  }, [onLoading])
+
+    if (!isVisible) {
+      return
+    }
+
+    setIsLeaving(true)
+    const timer = window.setTimeout(() => {
+      setIsVisible(false)
+      setIsLeaving(false)
+    }, 1350)
+
+    return () => window.clearTimeout(timer)
+  }, [isVisible, onLoading])
 
   if (typeof window === 'undefined') {
-    return null // 避免在服务端渲染时渲染出这个组件
+    return null
   }
 
   return isVisible ? (
@@ -26,20 +40,39 @@ export default function LoadingCover() {
       id='loading-cover'
       role='status'
       aria-live='polite'
-      className={`dark:text-white text-black animate__animated animate__faster ${
-        onLoading ? 'animate__fadeIn' : 'animate__fadeOut'
-      }`}
-    >
-      <div className='loading-cover-pattern' aria-hidden='true' />
+      aria-label='页面加载中'
+      className={isLeaving ? 'is-leaving' : ''}>
+      <div className='loading-cover-pattern' aria-hidden='true'>
+        <span className='loading-cover-pattern-word'>ALLEN</span>
+      </div>
       <div className='loading-cover-main'>
         <div className='loading-cover-progress' aria-hidden='true'>
           <span />
         </div>
-        <div className='loading-cover-mark'>
-          <img src='/avatar.svg' alt='' />
+
+        <div className='loading-cover-portrait' aria-hidden='true'>
+          <span className='loading-cover-orbit loading-cover-orbit-one' />
+          <span className='loading-cover-orbit loading-cover-orbit-two' />
+          <div className='loading-cover-window loading-cover-window-back' />
+          <div className='loading-cover-window loading-cover-window-front'>
+            <div className='loading-cover-window-bar'>
+              <i />
+              <i />
+              <i />
+            </div>
+            <Image
+              src='/wechat-avatar.jpg'
+              width={112}
+              height={112}
+              priority
+              alt=''
+            />
+            <span className='loading-cover-code'>&lt;/&gt;</span>
+          </div>
         </div>
-        <p className='loading-cover-title'>正在打开</p>
-        <p className='loading-cover-caption'>稍等片刻，内容马上就来</p>
+
+        <p className='loading-cover-title' data-text='LOADING'>LOADING</p>
+        <p className='loading-cover-caption'>知行录 · 正在整理下一页</p>
       </div>
     </div>
   ) : null
