@@ -1,7 +1,7 @@
 const CONFIG = {
   HEO_HOME_POST_TWO_COLS: true, // 首页博客两列显示，若为false则只显示一列
-  // 首页参考图已存放在 public/images/heo/reference，关闭后恢复使用 Notion 文章封面
-  HEO_USE_REFERENCE_IMAGES: true,
+  // 默认使用 Notion 文章封面；如需启用首页固定参考图，再改为 true
+  HEO_USE_REFERENCE_IMAGES: false,
   HEO_REFERENCE_POST_IMAGES: [
     '/images/heo/reference/post-cover-01.webp',
     '/images/heo/reference/post-cover-02.webp',
